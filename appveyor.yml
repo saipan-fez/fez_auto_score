@@ -1,0 +1,16 @@
+version: 1.0.{build}
+skip_non_tags: true
+image: Visual Studio 2017
+configuration: Release
+platform: Any CPU
+before_build:
+- cmd: >-
+    cd src
+
+    nuget restore
+build:
+  project: src/FEZAutoScore.sln
+  verbosity: minimal
+artifacts:
+- path: src\FEZAutoScore\bin\$(configuration)
+  name: fez_auto_score

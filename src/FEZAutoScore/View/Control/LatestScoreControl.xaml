@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="FEZAutoScore.View.Control.LatestScoreControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesignMahApps="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:cv="clr-namespace:FEZAutoScore.View.Converter">
+    <UserControl.Resources>
+        <cv:ValueKiloConverter x:Key="ValueKilo" />
+        <Style x:Key="LatestScoreValueTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignBody1TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="LineHeight" Value="30" />
+            <Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+        </Style>
+        <Style x:Key="LatestScoreUnitTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignBody1TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Margin" Value="5,0,0,0"/>
+        </Style>
+        <Style x:Key="LatestScoreValueTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
+            <Setter Property="FontSize" Value="15" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding キル数}" Style="{StaticResource LatestScoreValueTextBlockStyle}"/>
+                    <TextBlock Text="kill" Style="{StaticResource LatestScoreUnitTextBlockStyle}"/>
+                    <TextBlock Text="{Binding デッド数}" Margin="5,0,0,0" Style="{StaticResource LatestScoreValueTextBlockStyle}"/>
+                    <TextBlock Text="dead" Style="{StaticResource LatestScoreUnitTextBlockStyle}"/>
+                    <TextBlock Text="{Binding PC与ダメージ, StringFormat=0.0, Converter={StaticResource ValueKilo}}" Margin="5,0,0,0" Style="{StaticResource LatestScoreValueTextBlockStyle}"/>
+                    <TextBlock Text="k" Style="{StaticResource LatestScoreUnitTextBlockStyle}"/>
+                    <StackPanel Margin="10,0,0,0">
+                        <TextBlock Text="{Binding 職業}" Style="{StaticResource LatestScoreUnitTextBlockStyle}"/>
+                        <TextBlock Text="{Binding Map名}" Style="{StaticResource LatestScoreUnitTextBlockStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <StackPanel Grid.Row="2" HorizontalAlignment="Left">
+                <TextBox Text="{Binding 備考, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Width="250"
+                         Style="{StaticResource LatestScoreValueTextBoxStyle}"
+                         materialDesignMahApps:HintAssist.Hint=" 備考"/>
+            </StackPanel>
+            <StackPanel Grid.Row="4" HorizontalAlignment="Left">
+                <CheckBox Content="集計対象" IsChecked="{Binding 集計対象, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

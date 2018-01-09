@@ -1,0 +1,597 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D41307C5-79FE-4103-99FF-DB22DB618548}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>FEZAutoScore</RootNamespace>
+    <AssemblyName>FEZAutoScore</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Costura, Version=1.6.2.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Costura.Fody.1.6.2\lib\dotnet\Costura.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.MahApps, Version=0.0.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.MahApps.0.0.11\lib\net45\MaterialDesignThemes.MahApps.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.3.1.953, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.3.1.953\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Sqlite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Sqlite.Core.2.0.0\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore, Version=2.0.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.2.0.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Design, Version=2.0.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Design.2.0.1\lib\net461\Microsoft.EntityFrameworkCore.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Relational, Version=2.0.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Relational.2.0.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Sqlite, Version=2.0.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Sqlite.Core.2.0.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Sqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveProperty, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveProperty.3.6.0\lib\net46\ReactiveProperty.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveProperty.NET46, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveProperty.3.6.0\lib\net46\ReactiveProperty.NET46.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.1.1\lib\net45\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_green, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.7\lib\net45\SQLitePCLRaw.batteries_green.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.7\lib\net45\SQLitePCLRaw.batteries_v2.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.core.1.1.7\lib\net45\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.provider.e_sqlite3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9c301db686d0bd12, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.provider.e_sqlite3.net45.1.1.7\lib\net45\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.4.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Core, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Core.3.1.1\lib\net46\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Interfaces.3.1.1\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Linq.3.1.1\lib\net46\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.PlatformServices.3.1.1\lib\net46\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Windows.Threading.3.1.1\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.4.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Common\BindableBase.cs" />
+    <Compile Include="Migrations\20180104061320_Score.cs" />
+    <Compile Include="Migrations\20180104061320_Score.designer.cs">
+      <DependentUpon>20180104061320_Score.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ScoreRepositoryModelSnapshot.cs" />
+    <Compile Include="Model\Analyzer\Ocr\SkillOcr.cs" />
+    <Compile Include="Model\Setting\AppSetting.cs" />
+    <Compile Include="Model\TextFomatter\ScoreTextFormatter.cs" />
+    <Compile Include="ViewModel\SettingDialogViewModel.cs" />
+    <Compile Include="View\Control\LatestScoreControl.xaml.cs">
+      <DependentUpon>LatestScoreControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Setting\BaseSetting.cs" />
+    <Compile Include="View\Control\AccumulateStatusControl.xaml.cs">
+      <DependentUpon>AccumulateStatusControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Analyzer\Ocr\MapNameOcr.cs" />
+    <Compile Include="Model\Repository\ScoreFileRepository.cs" />
+    <Compile Include="Model\Repository\ScoreRepository.cs" />
+    <Compile Include="Model\Repository\SettingRepository.cs" />
+    <Compile Include="Model\Setting\ScoreDataGridColumnVisibleSetting.cs" />
+    <Compile Include="Model\ScreenShot\FEZScreenShooter.cs" />
+    <Compile Include="Model\Repository\ScreenShotRepository.cs" />
+    <Compile Include="Model\Win32\NativeMethods.cs" />
+    <Compile Include="Usecase\ScoreAccumulateUserCase.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="View\SettingDialog.xaml.cs">
+      <DependentUpon>SettingDialog.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\Control\LatestScoreControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Control\AccumulateStatusControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Control\ScoreDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Extension\BitmapExtension.cs" />
+    <Compile Include="View\Control\ScoreDataGrid.xaml.cs">
+      <DependentUpon>ScoreDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Converter\ValueKiloConverter.cs" />
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="View\SettingDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\Entity\ScoreEntity.cs" />
+    <Compile Include="Model\Analyzer\Ocr\TotalScoreOcr.cs" />
+    <Compile Include="Model\Analyzer\Ocr\DetailScoreOcr.cs" />
+    <Compile Include="Model\Analyzer\Ocr\KillScoreOcr.cs" />
+    <Compile Include="Model\Analyzer\Ocr\Ocr.cs" />
+    <Compile Include="Model\Analyzer\Ocr\WarTimeOcr.cs" />
+    <Compile Include="Model\Analyzer\FEZScoreAnalyzer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="DB更新手順.md" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Resource Include="score.db" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\MapNameBitmap\アシロマ山麓.bmp" />
+    <Resource Include="Resource\MapNameBitmap\アベル渓谷.bmp" />
+    <Resource Include="Resource\MapNameBitmap\アンバーステップ平原.bmp" />
+    <Resource Include="Resource\MapNameBitmap\アークトゥルス隕石跡.bmp" />
+    <Resource Include="Resource\MapNameBitmap\インベイ高地.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ウィネッシュ渓谷.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ウェンズデイ古戦場跡.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ウォーロック古戦場跡.bmp" />
+    <Resource Include="Resource\MapNameBitmap\エルギル高原.bmp" />
+    <Resource Include="Resource\MapNameBitmap\オブシディアン荒地.bmp" />
+    <Resource Include="Resource\MapNameBitmap\オリオン廃街.bmp" />
+    <Resource Include="Resource\MapNameBitmap\カペラ隕石跡.bmp" />
+    <Resource Include="Resource\MapNameBitmap\キンカッシュ古戦場跡.bmp" />
+    <Resource Include="Resource\MapNameBitmap\クダン丘陵.bmp" />
+    <Resource Include="Resource\MapNameBitmap\クノーラ雪原.bmp" />
+    <Resource Include="Resource\MapNameBitmap\クラウス山脈.bmp" />
+    <Resource Include="Resource\MapNameBitmap\クローディア水源.bmp" />
+    <Resource Include="Resource\MapNameBitmap\グランフォーク河口.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ゴブリンフォーク.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ザーク古戦場跡.bmp" />
+    <Resource Include="Resource\MapNameBitmap\シディット水域.bmp" />
+    <Resource Include="Resource\MapNameBitmap\シバーグ遺跡.bmp" />
+    <Resource Include="Resource\MapNameBitmap\シュア島古戦場跡.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ジャコル丘陵.bmp" />
+    <Resource Include="Resource\MapNameBitmap\スピカ隕石跡.bmp" />
+    <Resource Include="Resource\MapNameBitmap\セノビア荒地.bmp" />
+    <Resource Include="Resource\MapNameBitmap\セルベーン高地.bmp" />
+    <Resource Include="Resource\MapNameBitmap\セントウォーク高地.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ソーン平原.bmp" />
+    <Resource Include="Resource\MapNameBitmap\タマライア水源.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ダガー島.bmp" />
+    <Resource Include="Resource\MapNameBitmap\デスパイア山麓.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ドランゴラ荒地.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ニコナ街道.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ネフタル雪原.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ノイム草原.bmp" />
+    <Resource Include="Resource\MapNameBitmap\フェブェ雪原.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ブリザール湿原.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ブローデン古戦場跡.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ヘイムダル荒地.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ベルタ平原.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ホークウィンド高地.bmp" />
+    <Resource Include="Resource\MapNameBitmap\マスクス水源.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ラインレイ渓谷.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ラナス城跡.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ルダン雪原.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ルード雪原.bmp" />
+    <Resource Include="Resource\MapNameBitmap\レイクパス荒地.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ログマール古戦場跡.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ロザリオ高地.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ロッシ雪原.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ローグローブ台地.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ワーグノスの地.bmp" />
+    <Resource Include="Resource\MapNameBitmap\ワードノール平原.bmp" />
+    <Resource Include="Resource\MapNameBitmap\始まりの大地.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\SkillBitmap\Cestus_エナジースフィア.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_エナジースフィア_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_エンダーレイド.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_エンダーレイド_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_ゲイザースマッシュ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_ゲイザースマッシュ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_サイクロンディザスター.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_サイクロンディザスター_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_シャットアウト.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_シャットアウト_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_ショックウェイブ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_ショックウェイブ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_タワードミネーション.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_タワードミネーション_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_ドレインクロー.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_ドレインクロー_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_ハードレインフォース.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_ハードレインフォース_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_ハームアクティベイト.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_ハームアクティベイト_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_ホーネットスティング.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_ホーネットスティング_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_通常攻撃.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_通常攻撃_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_アクセラレーション.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_アクセラレーション_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_イレイスマジック.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_イレイスマジック_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_エリアルフォール.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_エリアルフォール_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_オブティンプロテクト.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_オブティンプロテクト_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_シャイニングクロス.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_シャイニングクロス_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_ストライクダウン.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_ストライクダウン_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_テンペストピアス.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_テンペストピアス_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_デュアルストライク.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_デュアルストライク_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_フィニッシュスラスト.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_フィニッシュスラスト_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_フラッシュスティンガー.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_フラッシュスティンガー_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_ペネトレイトスラスト.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_ペネトレイトスラスト_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_ラピッドファンデヴ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_ラピッドファンデヴ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_リバースキック.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_リバースキック_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_ヴィガーエイド.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_ヴィガーエイド_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_通常攻撃.bmp" />
+    <Resource Include="Resource\SkillBitmap\Fencer_通常攻撃_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_アローレイン.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_アローレイン_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_アームブレイク.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_アームブレイク_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_イーグルショット.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_イーグルショット_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_エアレイド.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_エアレイド_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ガードブレイク.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ガードブレイク_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_クイックビート.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_クイックビート_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_クラッシュショット.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_クラッシュショット_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_コメットキャノン.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_コメットキャノン_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_スウィープキャノン.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_スウィープキャノン_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_スパイダーウェブ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_スパイダーウェブ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ダガーストライク.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ダガーストライク_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_トゥルーショット.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_トゥルーショット_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ドッジシュート.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ドッジシュート_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ハイド.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ハイド_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_バーストキャノン.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_バーストキャノン_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_パニッシングストライク.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_パニッシングストライク_D.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_パニッシングストライク_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_パワーシュート.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_パワーシュート_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_パワーブレイク.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_パワーブレイク_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ピアッシングシュート.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ピアッシングシュート_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ファストショット.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ファストショット_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_フリックショット.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_フリックショット_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ブレイズショット.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ブレイズショット_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ホワイトバレット.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ホワイトバレット_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ポイズンショット.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ポイズンショット_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ポイズンブロウ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ポイズンブロウ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ラッシュバレット.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ラッシュバレット_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_レッグブレイク.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_レッグブレイク_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ヴァイパーバイト.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ヴァイパーバイト_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ヴォイドダークネス.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_ヴォイドダークネス_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_通常攻撃.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_通常攻撃_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_アイスジャベリン.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_アイスジャベリン_D.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_アイスジャベリン_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_アイスターゲット.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_アイスターゲット_D.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_アイスターゲット_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_アイスボルト.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_アイスボルト_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_エレキドライブ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_エレキドライブ_D.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_エレキドライブ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_グラビティキャプチャー.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_グラビティキャプチャー_D.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_グラビティキャプチャー_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_サンダーボルト.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_サンダーボルト_D.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_サンダーボルト_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ジャッジメントレイ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ジャッジメントレイ_D.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ジャッジメントレイ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_スパークフレア.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_スパークフレア_D.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_スパークフレア_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ファイア.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ファイア_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ファイアランス.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ファイアランス_D.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ファイアランス_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_フリージングウェイブ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_フリージングウェイブ_D.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_フリージングウェイブ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_フレイムサークル.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_フレイムサークル_D.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_フレイムサークル_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ブリザードカレス.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ブリザードカレス_D.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ブリザードカレス_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ヘルファイア.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ヘルファイア_D.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ヘルファイア_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_メテオインパクト.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_メテオインパクト_D.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_メテオインパクト_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ライトニング.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ライトニング_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ライトニングスピア.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ライトニングスピア_D.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_ライトニングスピア_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_レーザーブラスト.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_レーザーブラスト_D.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_レーザーブラスト_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_詠唱.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_詠唱_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_通常攻撃.bmp" />
+    <Resource Include="Resource\SkillBitmap\Sorcerer_通常攻撃_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_アサルトエッジ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_アサルトエッジ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_アタックレインフォース.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_アタックレインフォース_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_アークスタンプ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_アークスタンプ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_エクステンブレイド.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_エクステンブレイド_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_エンダーペイン.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_エンダーペイン_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ガードレインフォース.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ガードレインフォース_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_クラックバング.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_クラックバング_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_クランブルストーム.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_クランブルストーム_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_シールドバッシュ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_シールドバッシュ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ストライクスマッシュ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ストライクスマッシュ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_スマッシュ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_スマッシュ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_スラムアタック.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_スラムアタック_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ソニックブーム.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ソニックブーム_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ソリッドウォール.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ソリッドウォール_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ソードランページ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ソードランページ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ドラゴンテイル.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ドラゴンテイル_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_フォースインパクト.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_フォースインパクト_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ブレイズスラッシュ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ブレイズスラッシュ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ヘビースマッシュ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ヘビースマッシュ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ベヒモステイル.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_ベヒモステイル_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_通常攻撃.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_通常攻撃_S.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\SkillBitmap\Cestus_アースバインド.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_アースバインド_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_インテンスファイ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_インテンスファイ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_ソリッドストライク.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_ソリッドストライク_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_ノックインパクト.bmp" />
+    <Resource Include="Resource\SkillBitmap\Cestus_ノックインパクト_S.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.7\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.7\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.7\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.7\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets'))" />
+    <Error Condition="!Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.7\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.7\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets'))" />
+    <Error Condition="!Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.7\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.7\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets'))" />
+    <Error Condition="!Exists('..\packages\Fody.2.0.0\build\netstandard1.4\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.0.0\build\netstandard1.4\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets'))" />
+  </Target>
+  <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.7\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.7\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" />
+  <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.7\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.7\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets')" />
+  <Import Project="..\packages\Fody.2.0.0\build\netstandard1.4\Fody.targets" Condition="Exists('..\packages\Fody.2.0.0\build\netstandard1.4\Fody.targets')" />
+  <Import Project="..\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>del $(TargetDir)FEZAutoScore.exe.config
+del $(TargetDir)FEZAutoScore.pdb</PostBuildEvent>
+  </PropertyGroup>
+</Project>
