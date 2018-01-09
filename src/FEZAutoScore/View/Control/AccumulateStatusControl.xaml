@@ -1,0 +1,57 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             x:Class="FEZAutoScore.View.Control.AccumulateStatusControl">
+    <StackPanel Orientation="Horizontal">
+        <Ellipse Width="10" Height="10">
+            <i:Interaction.Triggers>
+                <ei:DataTrigger Binding="{Binding CurrentState.Value}" Value="Monitoring">
+                    <ei:ChangePropertyAction PropertyName="Fill">
+                        <ei:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="Green" />
+                        </ei:ChangePropertyAction.Value>
+                    </ei:ChangePropertyAction>
+                </ei:DataTrigger>
+                <ei:DataTrigger Binding="{Binding CurrentState.Value}" Value="Sleeping">
+                    <ei:ChangePropertyAction PropertyName="Fill">
+                        <ei:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="LimeGreen" />
+                        </ei:ChangePropertyAction.Value>
+                    </ei:ChangePropertyAction>
+                </ei:DataTrigger>
+                <ei:DataTrigger Binding="{Binding CurrentState.Value}" Value="Stopping">
+                    <ei:ChangePropertyAction PropertyName="Fill">
+                        <ei:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="Gray" />
+                        </ei:ChangePropertyAction.Value>
+                    </ei:ChangePropertyAction>
+                </ei:DataTrigger>
+                <ei:DataTrigger Binding="{Binding CurrentState.Value}" Value="Stopped">
+                    <ei:ChangePropertyAction PropertyName="Fill">
+                        <ei:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="Red" />
+                        </ei:ChangePropertyAction.Value>
+                    </ei:ChangePropertyAction>
+                </ei:DataTrigger>
+            </i:Interaction.Triggers>
+        </Ellipse>
+        <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
+                VerticalAlignment="Center" Margin="10,0,0,0">
+                <i:Interaction.Triggers>
+                    <ei:DataTrigger Binding="{Binding CurrentState.Value}" Value="Monitoring">
+                        <ei:ChangePropertyAction PropertyName="Text" Value="監視中" />
+                    </ei:DataTrigger>
+                    <ei:DataTrigger Binding="{Binding CurrentState.Value}" Value="Sleeping">
+                        <ei:ChangePropertyAction PropertyName="Text" Value="休止中" />
+                    </ei:DataTrigger>
+                    <ei:DataTrigger Binding="{Binding CurrentState.Value}" Value="Stopping">
+                        <ei:ChangePropertyAction PropertyName="Text" Value="停止処理中" />
+                    </ei:DataTrigger>
+                    <ei:DataTrigger Binding="{Binding CurrentState.Value}" Value="Stopped">
+                        <ei:ChangePropertyAction PropertyName="Text" Value="停止中" />
+                    </ei:DataTrigger>
+                </i:Interaction.Triggers>
+        </TextBlock>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,169 @@
+﻿<UserControl x:Class="FEZAutoScore.View.Control.ScoreDataGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </UserControl.Resources>
+    <Grid>
+        <FrameworkElement x:Name="Proxy" Visibility="Collapsed" />
+        <DataGrid ItemsSource="{Binding ScoreCollection}" AutoGenerateColumns="False">
+            <DataGrid.Resources>
+                <Style x:Key="HeaderMenuItem" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MaterialDesignMenuItem}">
+                    <Setter Property="IsCheckable" Value="True"/>
+                </Style>
+                <ContextMenu x:Key="DataGridColumnHeaderContextMenu" StaysOpen="True">
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.集計対象.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="集計対象" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.記録日時.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="記録日時" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.Map名.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="Map名" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.結果.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="結果" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.戦争継続時間.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="戦争継続時間" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.戦闘.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="戦闘" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.領域.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="領域" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.支援.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="支援" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.PC与ダメージ.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="PC与ダメージ" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.キルダメージボーナス.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="キルダメージボーナス" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.召喚解除ボーナス.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="召喚解除ボーナス" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.建築与ダメージ.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="建築与ダメージ" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.領域破壊ボーナス.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="領域破壊ボーナス" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.領域ダメージボーナス.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="領域ダメージボーナス" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.貢献度.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="貢献度" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.クリスタル運用ボーナス.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="クリスタル運用ボーナス" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.召喚行動ボーナス.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="召喚行動ボーナス" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.キル数.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="キル数" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.デッド数.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="デッド数" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.建築数.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="建築数" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.建築物破壊数.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="建築物破壊数" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.クリスタル採掘量.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="クリスタル採掘量" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.職業.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="職業" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.スキル1.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="スキル1" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.スキル2.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="スキル2" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.スキル3.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="スキル3" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.スキル4.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="スキル4" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.スキル5.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="スキル5" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.スキル6.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="スキル6" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.スキル7.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="スキル7" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.スキル8.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="スキル8" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.ColumnVisibleSetting.備考.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="備考" Style="{StaticResource HeaderMenuItem}" />
+                </ContextMenu>
+                <ToolTip x:Key="DataGridColumnHeaderToolTip" Content="右クリックで列の表示/非表示を切り替え" />
+                <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                    <Setter Property="ContextMenu" Value="{StaticResource DataGridColumnHeaderContextMenu}" />
+                    <Setter Property="ToolTip" Value="{StaticResource DataGridColumnHeaderToolTip}" />
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="コピー (選択行の平均スコア)" Command="{Binding CopyAverageScoreCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItems}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon  Kind="ContentPaste" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="コピー (選択行の各スコア)" Command="{Binding CopyEachScoreCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItems}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon  Kind="ContentPaste" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn
+                            Header="集計対象" Binding="{Binding 集計対象}"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.集計対象.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="記録日時" Binding="{Binding 記録日時, StringFormat=yyyy/MM/dd HH:mm}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.記録日時.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="Map名" Binding="{Binding Map名}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.Map名.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="結果" Binding="{Binding 結果}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.結果.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="戦争継続時間" Binding="{Binding 戦争継続時間, StringFormat=mm\\:ss}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.戦争継続時間.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="戦闘" Binding="{Binding 戦闘, StringFormat=#\,##0}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.戦闘.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="領域" Binding="{Binding 領域, StringFormat=#\,##0}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.領域.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="支援" Binding="{Binding 支援, StringFormat=#\,##0}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.支援.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="PC与ダメージ" Binding="{Binding PC与ダメージ, StringFormat=#\,##0}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.PC与ダメージ.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="キルダメージボーナス" Binding="{Binding キルダメージボーナス, StringFormat=#\,##0}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.キルダメージボーナス.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="召喚解除ボーナス" Binding="{Binding 召喚解除ボーナス, StringFormat=#\,##0}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.召喚解除ボーナス.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="建築与ダメージ" Binding="{Binding 建築与ダメージ, StringFormat=#\,##0}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.建築与ダメージ.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="領域破壊ボーナス" Binding="{Binding 領域破壊ボーナス, StringFormat=#\,##0}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.領域破壊ボーナス.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="貢献度" Binding="{Binding 貢献度, StringFormat=#\,##0}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.貢献度.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="クリスタル運用ボーナス" Binding="{Binding クリスタル運用ボーナス, StringFormat=#\,##0}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.クリスタル運用ボーナス.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="召喚行動ボーナス" Binding="{Binding 召喚行動ボーナス, StringFormat=#\,##0}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.召喚行動ボーナス.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="キル数" Binding="{Binding キル数, StringFormat=#\,##0}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.キル数.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="デッド数" Binding="{Binding デッド数, StringFormat=#\,##0}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.デッド数.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="建築数" Binding="{Binding 建築数, StringFormat=#\,##0}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.建築数.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="建築物破壊数" Binding="{Binding 建築物破壊数, StringFormat=#\,##0}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.建築物破壊数.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="クリスタル採掘量" Binding="{Binding クリスタル採掘量, StringFormat=#\,##0}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.クリスタル採掘量.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="職業" Binding="{Binding 職業}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.職業.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="スキル1" Binding="{Binding スキル1}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.スキル1.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="スキル2" Binding="{Binding スキル2}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.スキル2.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="スキル3" Binding="{Binding スキル3}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.スキル3.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="スキル4" Binding="{Binding スキル4}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.スキル4.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="スキル5" Binding="{Binding スキル5}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.スキル5.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="スキル6" Binding="{Binding スキル6}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.スキル6.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="スキル7" Binding="{Binding スキル7}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.スキル7.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="スキル8" Binding="{Binding スキル8}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.スキル8.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="備考" Binding="{Binding 備考, UpdateSourceTrigger=LostFocus}"
+                            Visibility="{Binding DataContext.ColumnVisibleSetting.備考.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
