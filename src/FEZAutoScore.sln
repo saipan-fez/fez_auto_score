@@ -1,16 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZAutoScore", "FEZAutoScore\FEZAutoScore.csproj", "{D41307C5-79FE-4103-99FF-DB22DB618548}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8107D20D-3AA9-4499-BB58-17E08DC32390}"
-	ProjectSection(SolutionItems) = preProject
-		..\LICENSE.txt = ..\LICENSE.txt
-		..\doc\OCR_Algorithm.md = ..\doc\OCR_Algorithm.md
-		..\README.md = ..\README.md
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
