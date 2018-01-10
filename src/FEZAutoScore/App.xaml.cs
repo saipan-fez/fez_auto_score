@@ -30,7 +30,7 @@ namespace FEZAutoScore
         {
             if (e.Exception is TaskCanceledException) return;
 
-            Debugger.Break();
+            //Debugger.Break();
         }
 #endif
 
@@ -38,30 +38,55 @@ namespace FEZAutoScore
         {
             if (e.Exception is TaskCanceledException) return;
 
-            OutputAsLogFile(e.Exception);
+            ApplicationError.HandleUnexpectedError(e.Exception);
         }
 
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            OutputAsLogFile(e.Exception);
+            ApplicationError.HandleUnexpectedError(e.Exception);
         }
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            if (!e.IsTerminating)
-            {
-                // message
-            }
+            var showMessageBox = !e.IsTerminating;
 
-            OutputAsLogFile(e.ExceptionObject as Exception);
+            ApplicationError.HandleUnexpectedError(e.ExceptionObject as Exception, showMessageBox);
         }
+    }
 
-        DirectoryInfo _directory = new DirectoryInfo(
-                Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "errorlog"));
-
+    public class ApplicationError
+    {
         private const string ErrorLogFileName = "error_{0}.log";
 
-        private void OutputAsLogFile(Exception ex)
+        private static readonly DirectoryInfo _directory = new DirectoryInfo(
+                Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "errorlog"));
+
+        private static bool _isFirstError = true;
+
+        public static void HandleUnexpectedError(Exception ex, bool showMessageBox = true)
+        {
+            if (!_isFirstError)
+            {
+                return;
+            }
+
+            _isFirstError = true;
+
+            try
+            {
+                OutputAsLogFile(ex);
+            }
+            catch { }
+
+            if (showMessageBox)
+            {
+                MessageBox.Show(Properties.Resources.UnexpectedErrorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            Application.Current.Shutdown(-1);
+        }
+
+        private static void OutputAsLogFile(Exception ex)
         {
             if (ex == null)
             {
@@ -85,28 +110,29 @@ namespace FEZAutoScore
                 sw.WriteLine(ex.Source);
                 sw.WriteLine("[StackTrace]");
                 sw.WriteLine(ex.StackTrace);
+                sw.WriteLine(string.Empty);
 
-                if (ex.InnerException != null)
-                {
-                    sw.WriteLine("---InnerException-------------------");
-                    sw.WriteLine("[Message]");
-                    sw.WriteLine(ex.InnerException.Message);
-                    sw.WriteLine("[Source]");
-                    sw.WriteLine(ex.InnerException.Source);
-                    sw.WriteLine("[StackTrace]");
-                    sw.WriteLine(ex.InnerException.StackTrace);
-                }
+                OutputInnnerException(ex, sw);
             }
         }
-    }
 
-    public class ApplicationError
-    {
-        private static bool isFirstError = true;
-
-        public static void Output()
+        private static void OutputInnnerException(Exception ex, StreamWriter sw)
         {
+            if (ex.InnerException == null)
+            {
+                return;
+            }
 
+            sw.WriteLine("---InnerException-------------------");
+            sw.WriteLine("[Message]");
+            sw.WriteLine(ex.InnerException.Message);
+            sw.WriteLine("[Source]");
+            sw.WriteLine(ex.InnerException.Source);
+            sw.WriteLine("[StackTrace]");
+            sw.WriteLine(ex.InnerException.StackTrace);
+            sw.WriteLine(string.Empty);
+
+            OutputInnnerException(ex.InnerException, sw);
         }
     }
 }

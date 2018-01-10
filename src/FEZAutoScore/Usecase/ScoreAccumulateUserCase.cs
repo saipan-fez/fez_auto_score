@@ -57,10 +57,9 @@ namespace FEZAutoScore.Usecase
 
                 LatestScore.Value = ScoreCollection.LastOrDefault() ?? new ScoreEntity();
             }
-            catch
+            catch (Exception ex)
             {
-                // TODO: error handling
-                throw;
+                ApplicationError.HandleUnexpectedError(ex);
             }
         }
 
@@ -143,10 +142,9 @@ namespace FEZAutoScore.Usecase
 
                 _accumulateTask.Wait();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // TODO: error handling
-                throw;
+                ApplicationError.HandleUnexpectedError(ex);
             }
             finally
             {
@@ -204,7 +202,6 @@ namespace FEZAutoScore.Usecase
             {
                 // スクリーンショットを取得
                 using (var bitmap = shooter.Shoot())
-                //using (var bitmap = new System.Drawing.Bitmap(@"D:\src\FEZAutoScore\src\FEZAutoScore\bin\Debug - コピー\screenshot\20180105_074218.png"))
                 {
                     if (bitmap == null)
                     {
@@ -238,10 +235,9 @@ namespace FEZAutoScore.Usecase
             }
             catch (OperationCanceledException)
             { }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // TODO: error handling
-                throw;
+                ApplicationError.HandleUnexpectedError(ex);
             }
 
             return AccumulateResult.Successed;
@@ -256,16 +252,8 @@ namespace FEZAutoScore.Usecase
         {
             score.PropertyChanged += async (s, e) =>
             {
-                try
-                {
-                    _scoreRepository.ScoreDbSet.Update(score);
-                    await _scoreRepository.SaveChangesAsync();
-                }
-                catch
-                {
-                    // TODO: error handling
-                    throw;
-                }
+                _scoreRepository.ScoreDbSet.Update(score);
+                await _scoreRepository.SaveChangesAsync();
             };
         }
     }

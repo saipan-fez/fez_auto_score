@@ -171,7 +171,6 @@ namespace FEZAutoScore.Model.Analyzer
                 { }
                 catch
                 {
-                    // TODO: Error handling
                     throw;
                 }
 

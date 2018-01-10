@@ -1841,6 +1841,16 @@ namespace FEZAutoScore.Properties {
         }
         
         /// <summary>
+        ///   予期せぬエラーが発生しました。
+        ///アプリケーションを終了します。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string UnexpectedErrorMessage {
+            get {
+                return ResourceManager.GetString("UnexpectedErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
         public static System.Drawing.Bitmap Warrior_アークスタンプ {
