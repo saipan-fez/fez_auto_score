@@ -48,6 +48,9 @@
                             <Button Content="監視を開始する" Command="{Binding AccumulateStartCommand}"/>
                             <Button Content="監視を停止する" Command="{Binding AccumulateStopCommand}"/>
                             <Separator />
+                            <Button Content="戦績画像フォルダを開く" Command="{Binding OpenScreenShotFolderCommand}"/>
+                            <Button Content="直近の戦績フォルダを開く" Command="{Binding OpenLatestScoreFolderCommand}"/>
+                            <Separator />
                             <Button Content="CSVとして出力" Command="{Binding SaveAsCsvCommand}" />
                             <Separator />
                             <Button Content="設定" Command="{Binding ShowSettingDialogCommand}"/>

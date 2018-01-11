@@ -20,7 +20,7 @@ namespace FEZAutoScore.Model.Setting
             $"{KillCountFormat}kill {DeadCountFormat}dead {PCDKilloFormat}";
 
         public ReactiveProperty<bool> IsAutoImageSave { get; } = new ReactiveProperty<bool>(true);
-        public ReactiveProperty<bool> IsLatestScoreOutputAsText { get; } = new ReactiveProperty<bool>(true);
+        public ReactiveProperty<bool> IsLatestScoreOutputAsText { get; } = new ReactiveProperty<bool>(false);
         public ReactiveProperty<string> AverageScoreTextFormat { get; } = new ReactiveProperty<string>(DefaultAverageScoreTextFormat);
         public ReactiveProperty<string> ScoreTextFormat { get; } = new ReactiveProperty<string>(DefaultScoreTextFormat);
         public ReactiveProperty<string> LatestScoreTextFormat { get; } = new ReactiveProperty<string>(DefaultLatestScoreTextFormat);

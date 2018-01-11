@@ -1,5 +1,6 @@
 ﻿using FEZAutoScore.Model.Entity;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -15,22 +16,48 @@ namespace FEZAutoScore.Model.Repository
                 Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
                 FolderName));
 
-        public string DirectoryPath { get { return _directory.FullName; } }
+        private ScoreScreenShotRepository()
+        {
+        }
+
+        public static ScoreScreenShotRepository Create(bool createDirectory)
+        {
+            var ret = new ScoreScreenShotRepository();
+
+            if (createDirectory)
+            {
+                ret.CreateDirectoryIfNotExists();
+            }
+
+            return ret;
+        }
+
+        public void OpenDirectory()
+        {
+            CreateDirectoryIfNotExists();
+
+            Process.Start(_directory.FullName);
+        }
 
         public async Task SaveAsPngAsync(ScoreEntity score, Bitmap bitmap)
         {
             await Task.Run(() =>
             {
-                if (!_directory.Exists)
-                {
-                    _directory.Create();
-                }
+                CreateDirectoryIfNotExists();
 
                 var fileName = $"{score.記録日時.ToString("yyyyMMdd_HHmmss")}.png";
                 var fullpath = Path.Combine(_directory.FullName, fileName);
 
                 bitmap.Save(fullpath, ImageFormat.Png);
             });
+        }
+
+        public void CreateDirectoryIfNotExists()
+        {
+            if (!_directory.Exists)
+            {
+                _directory.Create();
+            }
         }
     }
 }

@@ -15,6 +15,7 @@
             <Setter Property="FontSize" Value="12" />
             <Setter Property="Foreground" Value="Gray" />
             <Setter Property="Margin" Value="10,0,0,0" />
+            <Setter Property="TextAlignment" Value="Right"/>
         </Style>
         <Style x:Key="ValueTextBox" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
             <Setter Property="MaxHeight" Value="100" />
@@ -45,7 +46,7 @@
                 <RowDefinition Height="15"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="10"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -54,13 +55,11 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="0" Grid.Column="0">
                 <TextBlock Text="戦績画像を自動保存する" Style="{StaticResource HeaderTextBlock}"/>
-                <TextBlock Text="screenshotフォルダに保存されます" Style="{StaticResource SubHeaderTextBlock}"/>
             </StackPanel>
             <ToggleButton Grid.Row="0" Grid.Column="1" IsChecked="{Binding IsAutoImageSave.Value}" />
 
             <StackPanel Grid.Row="2" Grid.Column="0">
                 <TextBlock Text="直近の戦績をテキストに出力する" Style="{StaticResource HeaderTextBlock}"/>
-                <TextBlock Text="LatestScore.txtに出力されます" Style="{StaticResource SubHeaderTextBlock}"/>
             </StackPanel>
             <ToggleButton Grid.Row="2" Grid.Column="1" IsChecked="{Binding IsLatestScoreOutputAsText.Value}"/>
 
@@ -84,6 +83,9 @@
             <TextBox Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2"
                  Text="{Binding LatestScoreTextFormat.Value}"
                  Style="{StaticResource ValueTextBox}"/>
+            <TextBlock Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2"
+                       Text="書式の詳細はReadMe.txtを参照してください"
+                       Style="{StaticResource SubHeaderTextBlock}"/>
         </Grid>
 
         <Grid Grid.Row="2">

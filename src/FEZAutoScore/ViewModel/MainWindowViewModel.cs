@@ -26,6 +26,8 @@ namespace FEZAutoScore.ViewModel
         public ReactiveCommand<object> CopyEachScoreCommand { get; }
         public ReactiveCommand SaveAsCsvCommand { get; }
         public ReactiveCommand ShowSettingDialogCommand { get; }
+        public ReactiveCommand OpenScreenShotFolderCommand { get; }
+        public ReactiveCommand OpenLatestScoreFolderCommand { get; }
 
         public SnackbarMessageQueue MessageQueue { get; } = new SnackbarMessageQueue();
 
@@ -123,6 +125,18 @@ namespace FEZAutoScore.ViewModel
                 {
                     _scoreAccumulateUseCase.UpdateAppSetting(viewModel.AppSetting.Value);
                 }
+            });
+
+            OpenScreenShotFolderCommand = new ReactiveCommand();
+            OpenScreenShotFolderCommand.Subscribe(() =>
+            {
+                _scoreAccumulateUseCase.OpenScreenShotFolder();
+            });
+
+            OpenLatestScoreFolderCommand = new ReactiveCommand();
+            OpenLatestScoreFolderCommand.Subscribe(() =>
+            {
+                _scoreAccumulateUseCase.OpenLatestScoreFolder();
             });
         }
     }

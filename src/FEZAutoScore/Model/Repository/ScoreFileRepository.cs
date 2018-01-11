@@ -3,6 +3,7 @@ using FEZAutoScore.Model.TextFomatter;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,16 +21,34 @@ namespace FEZAutoScore.Model.Repository
                 "fez_auto_score")
             );
 
-        public string DirectoryPath { get { return _directory.FullName; } }
+        private ScoreFileRepository()
+        {
+        }
+
+        public static ScoreFileRepository Create(bool createDummyFile)
+        {
+            var ret = new ScoreFileRepository();
+
+            if (createDummyFile)
+            {
+                ret.CreateDummyLatestScoreIfNotExists();
+            }
+
+            return ret;
+        }
+
+        public void OpenDirectory()
+        {
+            CreateDirectoryIfNotExists();
+
+            Process.Start(_directory.FullName);
+        }
 
         public async Task SaveAsLatestScoreAsync(string format, ScoreEntity score)
         {
-            if (!_directory.Exists)
-            {
-                _directory.Create();
-            }
+            CreateDirectoryIfNotExists();
 
-            var fullpath = Path.Combine(_directory.FullName, LatestScoreFileName);
+            var fullpath = GetLatestScoreFilePath();
 
             using (var sw = new StreamWriter(fullpath, false, Encoding.UTF8))
             {
@@ -55,6 +74,32 @@ namespace FEZAutoScore.Model.Repository
                     await text.WriteLineAsync(csvText);
                 }
             }
+        }
+
+        public void CreateDummyLatestScoreIfNotExists()
+        {
+            CreateDirectoryIfNotExists();
+
+            var fullpath = GetLatestScoreFilePath();
+            var file = new FileInfo(fullpath);
+
+            if (!file.Exists)
+            {
+                file.Create();
+            }
+        }
+
+        public void CreateDirectoryIfNotExists()
+        {
+            if (!_directory.Exists)
+            {
+                _directory.Create();
+            }
+        }
+
+        private string GetLatestScoreFilePath()
+        {
+            return Path.Combine(_directory.FullName, LatestScoreFileName);
         }
     }
 }

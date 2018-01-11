@@ -37,7 +37,12 @@ namespace FEZAutoScore.Usecase
         private bool _isAccumulating = false;
         private CancellationTokenSource _tokenSource = null;
         private Task _accumulateTask = null;
+
         private ScoreRepository _scoreRepository = null;
+        private ScoreScreenShotRepository _scoreScreenShotRepository = null;
+        private ScoreFileRepository _scoreFileRepository = null;
+        private FEZScreenShooter _fezScreenShooter = null;
+        private FEZScoreAnalyzer _fezScoreAnalyzer = null;
 
         public ScoreAccumulateUseCase()
         {
@@ -49,11 +54,18 @@ namespace FEZAutoScore.Usecase
             {
                 try
                 {
-                    _scoreRepository = new ScoreRepository();
-
                     var settingRepository = new SettingRepository();
                     ColumnVisibleSetting.Value = settingRepository.GetColumnVisibleSetting();
                     AppSetting.Value = settingRepository.GetAppSetting();
+
+                    var isAutoImageSave = AppSetting.Value.IsAutoImageSave.Value;
+                    var isLatestScoreOutputAsText = AppSetting.Value.IsLatestScoreOutputAsText.Value;
+
+                    _scoreRepository = new ScoreRepository();
+                    _scoreScreenShotRepository = ScoreScreenShotRepository.Create(isAutoImageSave);
+                    _scoreFileRepository = ScoreFileRepository.Create(isLatestScoreOutputAsText);
+                    _fezScreenShooter = new FEZScreenShooter();
+                    _fezScoreAnalyzer = new FEZScoreAnalyzer();
 
                     foreach (var score in _scoreRepository.ScoreDbSet.OrderBy(x => x.記録日時))
                     {
@@ -104,10 +116,6 @@ namespace FEZAutoScore.Usecase
             _accumulateTask = Task.Run(async () =>
             {
                 var token = _tokenSource.Token;
-                var shooter = new FEZScreenShooter();
-                var analyzer = new FEZScoreAnalyzer();
-                var screenShotRepository = new ScoreScreenShotRepository();
-                var scoreFileRepository = new ScoreFileRepository();
 
                 try
                 {
@@ -116,8 +124,8 @@ namespace FEZAutoScore.Usecase
                         UpdateState(ScoreAccumulatingState.Monitoring);
 
                         var ret = await AccumulateScoreAsync(
-                            shooter, analyzer, scoreFileRepository,
-                            screenShotRepository, _scoreRepository, AppSetting.Value,
+                            _fezScreenShooter, _fezScoreAnalyzer, _scoreFileRepository,
+                            _scoreScreenShotRepository, _scoreRepository, AppSetting.Value,
                             token);
 
                         switch (ret)
@@ -194,8 +202,7 @@ namespace FEZAutoScore.Usecase
 
         public async Task SaveAsCsvAsync()
         {
-            var scoreFileRepository = new ScoreFileRepository();
-            await scoreFileRepository.SaveAsCsvAsync(ScoreCollection);
+            await _scoreFileRepository.SaveAsCsvAsync(ScoreCollection);
         }
 
         public void UpdateAppSetting(AppSetting appSetting)
@@ -206,6 +213,26 @@ namespace FEZAutoScore.Usecase
             AppSetting.Value.LatestScoreTextFormat.Value = appSetting.LatestScoreTextFormat.Value;
             AppSetting.Value.ScoreTextFormat.Value = appSetting.ScoreTextFormat.Value;
             AppSetting.Value.IsAccumulatingAtLastTime.Value = appSetting.IsAccumulatingAtLastTime.Value;
+
+            if (AppSetting.Value.IsAutoImageSave.Value)
+            {
+                _scoreScreenShotRepository.CreateDirectoryIfNotExists();
+            }
+
+            if (AppSetting.Value.IsLatestScoreOutputAsText.Value)
+            {
+                _scoreFileRepository.CreateDummyLatestScoreIfNotExists();
+            }
+        }
+
+        public void OpenScreenShotFolder()
+        {
+            _scoreScreenShotRepository.OpenDirectory();
+        }
+
+        public void OpenLatestScoreFolder()
+        {
+            _scoreFileRepository.OpenDirectory();
         }
 
         private enum AccumulateResult
