@@ -1,4 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Weavers>
-  <Costura />
+  <Costura>
+    <ExcludeAssemblies>
+      <!-- DB更新時に必要になるアセンブリ -->
+      <!--Microsoft.Data.Sqlite
+      Microsoft.EntityFrameworkCore.Design
+      Microsoft.EntityFrameworkCore
+      Microsoft.EntityFrameworkCore.Relational
+      Microsoft.EntityFrameworkCore.Sqlite
+      Microsoft.Extensions.Caching.Abstractions
+      Microsoft.Extensions.Caching.Memory
+      Microsoft.Extensions.Configuration.Abstractions
+      Microsoft.Extensions.DependencyInjection.Abstractions
+      Microsoft.Extensions.DependencyInjection
+      Microsoft.Extensions.Logging.Abstractions
+      Microsoft.Extensions.Logging
+      Microsoft.Extensions.Options
+      Microsoft.Extensions.Primitives
+      Microsoft.Win32.Primitives-->
+    </ExcludeAssemblies>
+  </Costura>
 </Weavers>

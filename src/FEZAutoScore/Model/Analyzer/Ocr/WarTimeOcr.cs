@@ -111,11 +111,6 @@ namespace FEZAutoScore.Model.Analyzer.Ocr
                     ptr += skipPixel * bpp;
                 }
             }
-            catch (Exception ex)
-            {
-                int a = 0;
-                a++;
-            }
             finally
             {
                 try
