@@ -22,7 +22,7 @@ namespace FEZAutoScore.Model.Repository
 
         public string DirectoryPath { get { return _directory.FullName; } }
 
-        public async Task SaveAsLatestScoreAsync(ScoreEntity score)
+        public async Task SaveAsLatestScoreAsync(string format, ScoreEntity score)
         {
             if (!_directory.Exists)
             {
@@ -31,13 +31,11 @@ namespace FEZAutoScore.Model.Repository
 
             var fullpath = Path.Combine(_directory.FullName, LatestScoreFileName);
 
-            using (var text = new StreamWriter(fullpath, false, Encoding.UTF8))
+            using (var sw = new StreamWriter(fullpath, false, Encoding.UTF8))
             {
-                var kill = score.キル数;
-                var dead = score.デッド数;
-                var pcd = string.Format("{0:f1}", ((score.PC与ダメージ + 50.0d) / 1000.0d)); // "99.9k"と表示するため小数第二位で四捨五入
+                var text = ScoreTextFormatter.ToString(format, score);
 
-                await text.WriteLineAsync($"{kill}kill {dead}dead {pcd}k");
+                await sw.WriteLineAsync(text);
             }
         }
 

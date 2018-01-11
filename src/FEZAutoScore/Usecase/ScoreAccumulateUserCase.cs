@@ -100,7 +100,7 @@ namespace FEZAutoScore.Usecase
                         UpdateState(ScoreAccumulatingState.Monitoring);
 
                         var ret = await AccumulateScoreAsync(
-                            shooter, analyzer, scoreFileRepository, screenShotRepository, _scoreRepository, token);
+                            shooter, analyzer, scoreFileRepository, screenShotRepository, _scoreRepository, AppSetting, token);
 
                         switch (ret)
                         {
@@ -195,7 +195,7 @@ namespace FEZAutoScore.Usecase
 
         private async Task<AccumulateResult> AccumulateScoreAsync(
             FEZScreenShooter shooter, FEZScoreAnalyzer analyzer, ScoreFileRepository scoreFileRepository,
-            ScoreScreenShotRepository screenShotRepository, ScoreRepository scoreRepository,
+            ScoreScreenShotRepository screenShotRepository, ScoreRepository scoreRepository, AppSetting appSetting,
             CancellationToken token)
         {
             try
@@ -219,10 +219,16 @@ namespace FEZAutoScore.Usecase
                     RegisterToDbUpdateWhenPropertyChanged(score);
 
                     // 画像保存
-                    await screenShotRepository.SaveAsPngAsync(score, bitmap);
+                    if (appSetting.IsAutoImageSave.Value)
+                    {
+                        await screenShotRepository.SaveAsPngAsync(score, bitmap);
+                    }
 
                     // テキスト保存
-                    await scoreFileRepository.SaveAsLatestScoreAsync(score);
+                    if (appSetting.IsLatestScoreOutputAsText.Value)
+                    {
+                        await scoreFileRepository.SaveAsLatestScoreAsync(appSetting.LatestScoreTextFormat.Value, score);
+                    }
 
                     // DB保存
                     await scoreRepository.ScoreDbSet.AddAsync(score);
