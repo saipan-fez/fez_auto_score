@@ -37,7 +37,7 @@
             </i:Interaction.Triggers>
         </Ellipse>
         <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
-                VerticalAlignment="Center" Margin="10,0,0,0">
+                   VerticalAlignment="Center" Margin="10,0,0,0">
                 <i:Interaction.Triggers>
                     <ei:DataTrigger Binding="{Binding CurrentState.Value}" Value="Monitoring">
                         <ei:ChangePropertyAction PropertyName="Text" Value="監視中" />
@@ -49,7 +49,7 @@
                         <ei:ChangePropertyAction PropertyName="Text" Value="停止処理中" />
                     </ei:DataTrigger>
                     <ei:DataTrigger Binding="{Binding CurrentState.Value}" Value="Stopped">
-                        <ei:ChangePropertyAction PropertyName="Text" Value="停止中" />
+                        <ei:ChangePropertyAction PropertyName="Text" Value="停止（メニューから開始してください）" />
                     </ei:DataTrigger>
                 </i:Interaction.Triggers>
         </TextBlock>

@@ -45,7 +45,7 @@
                     <ctrl:AccumulateStatusControl Grid.Column="0"/>
                     <materialDesign:PopupBox Grid.Column="2" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                         <StackPanel >
-                            <Button Content="監視を再開する" Command="{Binding AccumulateStartCommand}"/>
+                            <Button Content="監視を開始する" Command="{Binding AccumulateStartCommand}"/>
                             <Button Content="監視を停止する" Command="{Binding AccumulateStopCommand}"/>
                             <Separator />
                             <Button Content="CSVとして出力" Command="{Binding SaveAsCsvCommand}" />

@@ -24,6 +24,7 @@ namespace FEZAutoScore.Model.Setting
         public ReactiveProperty<string> AverageScoreTextFormat { get; } = new ReactiveProperty<string>(DefaultAverageScoreTextFormat);
         public ReactiveProperty<string> ScoreTextFormat { get; } = new ReactiveProperty<string>(DefaultScoreTextFormat);
         public ReactiveProperty<string> LatestScoreTextFormat { get; } = new ReactiveProperty<string>(DefaultLatestScoreTextFormat);
+        public ReactiveProperty<bool> IsAccumulatingAtLastTime { get; } = new ReactiveProperty<bool>(false);
 
         public AppSetting Clone()
         {
@@ -33,6 +34,7 @@ namespace FEZAutoScore.Model.Setting
             setting.AverageScoreTextFormat.Value = AverageScoreTextFormat.Value;
             setting.ScoreTextFormat.Value = ScoreTextFormat.Value;
             setting.LatestScoreTextFormat.Value = LatestScoreTextFormat.Value;
+            setting.IsAccumulatingAtLastTime.Value = IsAccumulatingAtLastTime.Value;
 
             return setting;
         }

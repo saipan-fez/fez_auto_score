@@ -62,6 +62,12 @@ namespace FEZAutoScore.Usecase
                     }
 
                     LatestScore.Value = ScoreCollection.LastOrDefault() ?? new ScoreEntity();
+
+                    // 監視状態ONの状態で終了していた場合は、初期化時に監視を開始する
+                    if (AppSetting.Value.IsAccumulatingAtLastTime.Value)
+                    {
+                        StartToAccumulateScore();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -72,6 +78,9 @@ namespace FEZAutoScore.Usecase
 
         public void Dispose()
         {
+            // 次回起動時に監視状態を維持するため監視状態を保存
+            AppSetting.Value.IsAccumulatingAtLastTime.Value = _isAccumulating;
+
             StopToAccumulateScore();
 
             if (_scoreRepository != null)
@@ -196,6 +205,7 @@ namespace FEZAutoScore.Usecase
             AppSetting.Value.IsLatestScoreOutputAsText.Value = appSetting.IsLatestScoreOutputAsText.Value;
             AppSetting.Value.LatestScoreTextFormat.Value = appSetting.LatestScoreTextFormat.Value;
             AppSetting.Value.ScoreTextFormat.Value = appSetting.ScoreTextFormat.Value;
+            AppSetting.Value.IsAccumulatingAtLastTime.Value = appSetting.IsAccumulatingAtLastTime.Value;
         }
 
         private enum AccumulateResult

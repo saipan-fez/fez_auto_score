@@ -53,7 +53,6 @@ namespace FEZAutoScore.ViewModel
             LoadedCommand.Subscribe(async () =>
             {
                 await _scoreAccumulateUseCase.InitializeAsync();
-                _scoreAccumulateUseCase.StartToAccumulateScore();
 
                 IsLoading.Value = false;
             });
