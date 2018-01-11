@@ -1,9 +1,9 @@
 ﻿using FEZAutoScore.Model.Entity;
 using FEZAutoScore.Model.TextFomatter;
 using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +15,12 @@ namespace FEZAutoScore.Model.Repository
         private const string DefaultCsvFileName = "scores.csv";
 
         private static readonly DirectoryInfo _directory = new DirectoryInfo(
-            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                "fez_auto_score")
+            );
+
+        public string DirectoryPath { get { return _directory.FullName; } }
 
         public async Task SaveAsLatestScoreAsync(ScoreEntity score)
         {

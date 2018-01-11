@@ -1,19 +1,21 @@
 ﻿using FEZAutoScore.Model.Entity;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace FEZAutoScore.Model.Repository
 {
     public class ScoreScreenShotRepository
     {
-        private const string FolderName = "screenshot";
+        private const string FolderName = "fez_screenshot";
         private static readonly DirectoryInfo _directory = new DirectoryInfo(
-                Path.Combine(
-                    Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                    FolderName));
+            Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
+                FolderName));
+
+        public string DirectoryPath { get { return _directory.FullName; } }
 
         public async Task SaveAsPngAsync(ScoreEntity score, Bitmap bitmap)
         {

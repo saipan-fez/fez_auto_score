@@ -1,22 +1,22 @@
 ﻿using FEZAutoScore.Model.Setting;
 using Newtonsoft.Json;
+using System;
 using System.IO;
 using System.Linq;
 using System.Reactive;
-using System.Reflection;
 
 namespace FEZAutoScore.Model.Repository
 {
     public class SettingRepository
     {
-        private const string FolderName = "setting";
+        private const string FolderName = "fez_auto_score";
         private const string AppSettingFileName = "app_setting.json";
         private const string ColumnVisibleSettingFileName = "column_setting.json";
 
         private static readonly DirectoryInfo _directory = new DirectoryInfo(
-                Path.Combine(
-                    Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                    FolderName));
+            Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                FolderName));
 
         public ScoreDataGridColumnVisibleSetting GetColumnVisibleSetting()
         {
