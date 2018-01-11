@@ -3,7 +3,6 @@ using FEZAutoScore.Model.Setting;
 using FEZAutoScore.Usecase;
 using FEZAutoScore.View;
 using MaterialDesignThemes.Wpf;
-using Microsoft.Win32;
 using Reactive.Bindings;
 using System.Linq;
 using System.Reactive;
@@ -13,10 +12,11 @@ namespace FEZAutoScore.ViewModel
 {
     public class MainWindowViewModel
     {
+        public ReactiveProperty<bool> IsLoading { get; }
         public ReadOnlyReactiveProperty<ScoreAccumulatingState> CurrentState { get; }
         public ReadOnlyReactiveCollection<ScoreEntity> ScoreCollection { get; }
         public ReactiveProperty<ScoreEntity> LatestScore { get; }
-        public ScoreDataGridColumnVisibleSetting ColumnVisibleSetting { get; }
+        public ReactiveProperty<ScoreDataGridColumnVisibleSetting> ColumnVisibleSetting { get; }
 
         public ReactiveCommand LoadedCommand { get; }
         public ReactiveCommand ClosedCommand { get; }
@@ -35,6 +35,8 @@ namespace FEZAutoScore.ViewModel
         {
             _scoreAccumulateUseCase = new ScoreAccumulateUseCase();
 
+            IsLoading = new ReactiveProperty<bool>(true);
+
             CurrentState = _scoreAccumulateUseCase.State
                 .ToReadOnlyReactiveProperty();
 
@@ -44,12 +46,16 @@ namespace FEZAutoScore.ViewModel
             LatestScore = _scoreAccumulateUseCase.LatestScore
                 .ToReactiveProperty();
 
-            ColumnVisibleSetting = _scoreAccumulateUseCase.ColumnVisibleSetting;
+            ColumnVisibleSetting = _scoreAccumulateUseCase.ColumnVisibleSetting
+                .ToReactiveProperty();
 
             LoadedCommand = new ReactiveCommand();
-            LoadedCommand.Subscribe(() =>
+            LoadedCommand.Subscribe(async () =>
             {
+                await _scoreAccumulateUseCase.InitializeAsync();
                 _scoreAccumulateUseCase.StartToAccumulateScore();
+
+                IsLoading.Value = false;
             });
 
             ClosedCommand = new ReactiveCommand();
@@ -103,7 +109,7 @@ namespace FEZAutoScore.ViewModel
             ShowSettingDialogCommand.Subscribe(async () =>
             {
                 // 設定をコピーしてダイアログを開く
-                var appSetting = _scoreAccumulateUseCase.AppSetting.Clone();
+                var appSetting = _scoreAccumulateUseCase.AppSetting.Value.Clone();
                 var viewModel = new SettingDialogViewModel(appSetting);
 
                 var view = new SettingDialog()

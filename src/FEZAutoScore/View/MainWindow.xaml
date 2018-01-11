@@ -97,6 +97,14 @@
                 </Grid>
             </materialDesign:ColorZone>
         </Grid>
+
+        <!-- ロード中 -->
+        <Grid Visibility="{Binding IsLoading.Value, Converter={StaticResource BooleanToVisibility}}" Background="#88000000">
+            <ProgressBar IsIndeterminate="True" Value="35" Width="75" Height="75"
+                         HorizontalAlignment="Center" VerticalAlignment="Center"
+                         Style="{StaticResource MaterialDesignCircularProgressBar}" />
+        </Grid>
+
         <materialDesign:Snackbar MessageQueue="{Binding MessageQueue}" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
         <materialDesign:DialogHost Identifier="RootDialog" />
     </Grid>

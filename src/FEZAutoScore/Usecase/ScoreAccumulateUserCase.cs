@@ -31,8 +31,8 @@ namespace FEZAutoScore.Usecase
         public ReactiveCollection<ScoreEntity> ScoreCollection { get; } = new ReactiveCollection<ScoreEntity>();
         public ReactiveProperty<ScoreAccumulatingState> State { get; } = new ReactiveProperty<ScoreAccumulatingState>(ScoreAccumulatingState.Stopped);
         public ReactiveProperty<ScoreEntity> LatestScore { get; } = new ReactiveProperty<ScoreEntity>();
-        public ScoreDataGridColumnVisibleSetting ColumnVisibleSetting { get; }
-        public AppSetting AppSetting { get; }
+        public ReactiveProperty<ScoreDataGridColumnVisibleSetting> ColumnVisibleSetting { get; } = new ReactiveProperty<ScoreDataGridColumnVisibleSetting>();
+        public ReactiveProperty<AppSetting> AppSetting { get; } = new ReactiveProperty<AppSetting>();
 
         private bool _isAccumulating = false;
         private CancellationTokenSource _tokenSource = null;
@@ -41,26 +41,33 @@ namespace FEZAutoScore.Usecase
 
         public ScoreAccumulateUseCase()
         {
-            try
+        }
+
+        public async Task InitializeAsync()
+        {
+            await Task.Run(() =>
             {
-                _scoreRepository = new ScoreRepository();
-
-                var settingRepository = new SettingRepository();
-                ColumnVisibleSetting = settingRepository.GetColumnVisibleSetting();
-                AppSetting = settingRepository.GetAppSetting();
-
-                foreach (var score in _scoreRepository.ScoreDbSet.OrderBy(x => x.記録日時))
+                try
                 {
-                    RegisterToDbUpdateWhenPropertyChanged(score);
-                    ScoreCollection.Add(score);
-                }
+                    _scoreRepository = new ScoreRepository();
 
-                LatestScore.Value = ScoreCollection.LastOrDefault() ?? new ScoreEntity();
-            }
-            catch (Exception ex)
-            {
-                ApplicationError.HandleUnexpectedError(ex);
-            }
+                    var settingRepository = new SettingRepository();
+                    ColumnVisibleSetting.Value = settingRepository.GetColumnVisibleSetting();
+                    AppSetting.Value = settingRepository.GetAppSetting();
+
+                    foreach (var score in _scoreRepository.ScoreDbSet.OrderBy(x => x.記録日時))
+                    {
+                        RegisterToDbUpdateWhenPropertyChanged(score);
+                        ScoreCollection.Add(score);
+                    }
+
+                    LatestScore.Value = ScoreCollection.LastOrDefault() ?? new ScoreEntity();
+                }
+                catch (Exception ex)
+                {
+                    ApplicationError.HandleUnexpectedError(ex);
+                }
+            });
         }
 
         public void Dispose()
@@ -100,21 +107,26 @@ namespace FEZAutoScore.Usecase
                         UpdateState(ScoreAccumulatingState.Monitoring);
 
                         var ret = await AccumulateScoreAsync(
-                            shooter, analyzer, scoreFileRepository, screenShotRepository, _scoreRepository, AppSetting, token);
+                            shooter, analyzer, scoreFileRepository,
+                            screenShotRepository, _scoreRepository, AppSetting.Value,
+                            token);
 
                         switch (ret)
                         {
                             case AccumulateResult.FEZNotRunning:
                                 await Task.Delay(DeepSleepMilliSecond, token);
                                 break;
+
                             case AccumulateResult.NotScoreCapture:
                                 await Task.Delay(SleepMilliSecond, token);
                                 break;
+
                             case AccumulateResult.Successed:
                                 // 同じ戦争のスコアを複数回検出しないよう、5分間Waitする
                                 UpdateState(ScoreAccumulatingState.Sleeping);
                                 await Task.Delay(DetectSleepMilliSecond, token);
                                 break;
+
                             default:
                                 break;
                         }
@@ -159,14 +171,14 @@ namespace FEZAutoScore.Usecase
 
         public void CopyAverageScoreToClipboard(IEnumerable<ScoreEntity> scores)
         {
-            var text = AverageScoreTextFormatter.ToString(AppSetting.AverageScoreTextFormat.Value, scores.Where(x => x.集計対象));
+            var text = AverageScoreTextFormatter.ToString(AppSetting.Value.AverageScoreTextFormat.Value, scores.Where(x => x.集計対象));
 
             Clipboard.SetText(text);
         }
 
         public void CopyEachScoreToClipboard(IEnumerable<ScoreEntity> scores)
         {
-            var text = ScoreTextFormatter.ToString(AppSetting.ScoreTextFormat.Value, scores.Where(x => x.集計対象));
+            var text = ScoreTextFormatter.ToString(AppSetting.Value.ScoreTextFormat.Value, scores.Where(x => x.集計対象));
 
             Clipboard.SetText(text);
         }
@@ -179,11 +191,11 @@ namespace FEZAutoScore.Usecase
 
         public void UpdateAppSetting(AppSetting appSetting)
         {
-            AppSetting.AverageScoreTextFormat.Value = appSetting.AverageScoreTextFormat.Value;
-            AppSetting.IsAutoImageSave.Value = appSetting.IsAutoImageSave.Value;
-            AppSetting.IsLatestScoreOutputAsText.Value = appSetting.IsLatestScoreOutputAsText.Value;
-            AppSetting.LatestScoreTextFormat.Value = appSetting.LatestScoreTextFormat.Value;
-            AppSetting.ScoreTextFormat.Value = appSetting.ScoreTextFormat.Value;
+            AppSetting.Value.AverageScoreTextFormat.Value = appSetting.AverageScoreTextFormat.Value;
+            AppSetting.Value.IsAutoImageSave.Value = appSetting.IsAutoImageSave.Value;
+            AppSetting.Value.IsLatestScoreOutputAsText.Value = appSetting.IsLatestScoreOutputAsText.Value;
+            AppSetting.Value.LatestScoreTextFormat.Value = appSetting.LatestScoreTextFormat.Value;
+            AppSetting.Value.ScoreTextFormat.Value = appSetting.ScoreTextFormat.Value;
         }
 
         private enum AccumulateResult
