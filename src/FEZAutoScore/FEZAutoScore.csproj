@@ -187,6 +187,10 @@
     <Compile Include="Migrations\20180104061320_Score.designer.cs">
       <DependentUpon>20180104061320_Score.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20180119161212_AddWarSideColumn.cs" />
+    <Compile Include="Migrations\20180119161212_AddWarSideColumn.designer.cs">
+      <DependentUpon>20180119161212_AddWarSideColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ScoreRepositoryModelSnapshot.cs" />
     <Compile Include="Model\Analyzer\Ocr\SkillOcr.cs" />
     <Compile Include="Model\Setting\AppSetting.cs" />
@@ -277,7 +281,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Resource Include="score.db" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -567,7 +570,9 @@
     <Resource Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FodyWeavers.xml" />
+    <None Include="FodyWeavers.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt">

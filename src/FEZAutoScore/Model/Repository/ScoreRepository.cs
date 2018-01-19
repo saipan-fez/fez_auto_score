@@ -1,10 +1,8 @@
 ﻿using FEZAutoScore.Model.Entity;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.IO;
 using System.Reflection;
-using System.Windows;
 
 namespace FEZAutoScore.Model.Repository
 {
@@ -13,20 +11,6 @@ namespace FEZAutoScore.Model.Repository
         private const string ScoreDbFileName = "score.db";
 
         public DbSet<ScoreEntity> ScoreDbSet { get; protected set; }
-
-        public static void CreateDbFileIfNotExists()
-        {
-            var filePath = GetDbFilePath();
-
-            if (!File.Exists(filePath))
-            {
-                using (var src = Application.GetResourceStream(new Uri(ScoreDbFileName, UriKind.Relative)).Stream)
-                using (var dest = new FileStream(filePath, FileMode.CreateNew))
-                {
-                    src.CopyTo(dest);
-                }
-            }
-        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

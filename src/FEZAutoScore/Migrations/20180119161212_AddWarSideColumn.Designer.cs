@@ -12,9 +12,10 @@ using System;
 namespace FEZAutoScore.Migrations
 {
     [DbContext(typeof(ScoreRepository))]
-    partial class ScoreRepositoryModelSnapshot : ModelSnapshot
+    [Migration("20180119161212_AddWarSideColumn")]
+    partial class AddWarSideColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

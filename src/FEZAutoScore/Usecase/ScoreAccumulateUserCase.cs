@@ -11,6 +11,7 @@ using FEZAutoScore.Model.Setting;
 using System.Windows;
 using System.Collections.Generic;
 using FEZAutoScore.Model.TextFomatter;
+using Microsoft.EntityFrameworkCore;
 
 namespace FEZAutoScore.Usecase
 {
@@ -61,13 +62,14 @@ namespace FEZAutoScore.Usecase
                     var isAutoImageSave = AppSetting.Value.IsAutoImageSave.Value;
                     var isLatestScoreOutputAsText = AppSetting.Value.IsLatestScoreOutputAsText.Value;
 
-                    ScoreRepository.CreateDbFileIfNotExists();
-
                     _scoreRepository = new ScoreRepository();
                     _scoreScreenShotRepository = ScoreScreenShotRepository.Create(isAutoImageSave);
                     _scoreFileRepository = ScoreFileRepository.Create(isLatestScoreOutputAsText);
                     _fezScreenShooter = new FEZScreenShooter();
                     _fezScoreAnalyzer = new FEZScoreAnalyzer();
+
+                    // DBファイルが無ければ作成、作成済みだが古いバージョンの場合は自動で最新のテーブル構成に更新する
+                    _scoreRepository.Database.Migrate();
 
                     foreach (var score in _scoreRepository.ScoreDbSet.OrderBy(x => x.記録日時))
                     {

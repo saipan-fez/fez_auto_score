@@ -40,6 +40,10 @@ namespace FEZAutoScore.Model.Entity
         [Required]
         public WarResult 結果 { get { return _結果; } set { SetProperty(ref _結果, value); } }
         private WarResult _結果;
+
+        public string 攻守 { get { return _攻守; } set { SetProperty(ref _攻守, value); } }
+        private string _攻守;
+
         [Required]
         public TimeSpan 戦争継続時間 { get { return _戦争継続時間; } set { SetProperty(ref _戦争継続時間, value); } }
         private TimeSpan _戦争継続時間;
