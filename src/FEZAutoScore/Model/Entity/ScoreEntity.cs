@@ -44,6 +44,12 @@ namespace FEZAutoScore.Model.Entity
         public string 攻守 { get { return _攻守; } set { SetProperty(ref _攻守, value); } }
         private string _攻守;
 
+        public string 攻撃側国名 { get { return _攻撃側国名; } set { SetProperty(ref _攻撃側国名, value); } }
+        private string _攻撃側国名;
+
+        public string 防衛側国名 { get { return _防衛側国名; } set { SetProperty(ref _防衛側国名, value); } }
+        private string _防衛側国名;
+
         [Required]
         public TimeSpan 戦争継続時間 { get { return _戦争継続時間; } set { SetProperty(ref _戦争継続時間, value); } }
         private TimeSpan _戦争継続時間;

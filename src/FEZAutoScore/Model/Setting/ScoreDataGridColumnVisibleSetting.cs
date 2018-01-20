@@ -8,6 +8,9 @@ namespace FEZAutoScore.Model.Setting
         public ReactiveProperty<bool> 記録日時 { get; } = new ReactiveProperty<bool>(true);
         public ReactiveProperty<bool> Map名 { get; } = new ReactiveProperty<bool>(true);
         public ReactiveProperty<bool> 結果 { get; } = new ReactiveProperty<bool>(true);
+        public ReactiveProperty<bool> 攻守 { get; } = new ReactiveProperty<bool>();
+        public ReactiveProperty<bool> 攻撃側国名 { get; } = new ReactiveProperty<bool>();
+        public ReactiveProperty<bool> 防衛側国名 { get; } = new ReactiveProperty<bool>();
         public ReactiveProperty<bool> 戦争継続時間 { get; } = new ReactiveProperty<bool>();
         public ReactiveProperty<bool> 戦闘 { get; } = new ReactiveProperty<bool>();
         public ReactiveProperty<bool> 領域 { get; } = new ReactiveProperty<bool>();

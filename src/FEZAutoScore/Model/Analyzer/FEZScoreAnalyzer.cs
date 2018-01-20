@@ -15,10 +15,6 @@ namespace FEZAutoScore.Model.Analyzer
         // 画像の中心点から戦績結果ウィンドウ左上の相対座標
         private readonly Point ResultWindowLeftTopPoint = new Point(-262, -353);
 
-        // 戦争結果判定用の座標と色
-        private readonly Point WarResultPoint = new Point(250, 50);
-        private readonly Color WarResultLoseColor = Color.FromArgb(52, 52, 52);
-
         // FEZの戦績結果ウィンドウかどうかの判定に用いる座標および色
         private readonly Dictionary<Point, Color> ResultCheckTable = new Dictionary<Point, Color>()
         {
@@ -26,6 +22,26 @@ namespace FEZAutoScore.Model.Analyzer
             { new Point(50, 200),  Color.FromArgb(167, 155, 145) },
             { new Point(730, 335), Color.FromArgb(50, 50, 50) },
             { new Point(730, 550), Color.FromArgb(61, 47, 43) },
+        };
+
+        // 戦争結果判定用の座標と色
+        private readonly Point WarResultPoint = new Point(250, 50);
+        private readonly Color WarResultLoseColor = Color.FromArgb(52, 52, 52);
+
+        // 攻守判定用の座標と色
+        private readonly Point WarSidePoint = new Point(200, 100);
+        private readonly Color WarSideOffenseColor = Color.FromArgb(208, 199, 178);
+
+        // 国名判定用の座標と国名・色
+        private readonly Point DefenseCountryPoint = new Point(100, 90);
+        private readonly Point OffenseCountryPoint = new Point(414, 90);
+        private readonly Dictionary<Color, string> CountryTable = new Dictionary<Color, string>()
+        {
+            { Color.FromArgb(54,  105, 255), "エルソード王国" },
+            { Color.FromArgb(86,  231,  37), "カセドリア連合王国" },
+            { Color.FromArgb(161,  39, 196), "ゲブランド帝国" },
+            { Color.FromArgb(48,   44,  42), "ネツァワル王国" },
+            { Color.FromArgb(250, 222,  45), "ホルデイン王国" },
         };
 
         // 各スコアが描かれている位置
@@ -123,6 +139,13 @@ namespace FEZAutoScore.Model.Analyzer
 
                     // 戦争結果
                     score.結果 = ScanWarResult(bitmap);
+
+                    // 攻守
+                    score.攻守 = ScanWarSide(bitmap);
+
+                    // 国名
+                    score.攻撃側国名 = ScanCountry(OffenseCountryPoint, bitmap);
+                    score.防衛側国名 = ScanCountry(DefenseCountryPoint, bitmap);
 
                     // 戦争経過時間
                     score.戦争継続時間 = Scan(_warTimeOcr, bitmap, ScoreRectTable[nameof(ScoreEntity.戦争継続時間)]);
@@ -229,6 +252,20 @@ namespace FEZAutoScore.Model.Analyzer
             var color = bitmap.GetPixel(WarResultPoint.X, WarResultPoint.Y);
 
             return color != WarResultLoseColor ? WarResult.Win : WarResult.Lose;
+        }
+
+        private string ScanWarSide(Bitmap bitmap)
+        {
+            var color = bitmap.GetPixel(WarSidePoint.X, WarSidePoint.Y);
+
+            return color == WarSideOffenseColor ? "攻撃" : "防衛";
+        }
+
+        private string ScanCountry(Point point, Bitmap bitmap)
+        {
+            var color = bitmap.GetPixel(point.X, point.Y);
+
+            return CountryTable.TryGetValue(color, out string country) ? country : "不明";
         }
 
         private Work ScanWork(

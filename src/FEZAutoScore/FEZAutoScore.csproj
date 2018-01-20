@@ -191,6 +191,10 @@
     <Compile Include="Migrations\20180119161212_AddWarSideColumn.designer.cs">
       <DependentUpon>20180119161212_AddWarSideColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20180120030439_AddCountry.cs" />
+    <Compile Include="Migrations\20180120030439_AddCountry.designer.cs">
+      <DependentUpon>20180120030439_AddCountry.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ScoreRepositoryModelSnapshot.cs" />
     <Compile Include="Model\Analyzer\Ocr\SkillOcr.cs" />
     <Compile Include="Model\Setting\AppSetting.cs" />

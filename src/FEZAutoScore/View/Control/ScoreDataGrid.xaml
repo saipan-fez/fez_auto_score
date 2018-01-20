@@ -20,6 +20,9 @@
                     <MenuItem IsChecked="{Binding DataContext.記録日時.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="記録日時" Style="{StaticResource HeaderMenuItem}" />
                     <MenuItem IsChecked="{Binding DataContext.Map名.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="Map名" Style="{StaticResource HeaderMenuItem}" />
                     <MenuItem IsChecked="{Binding DataContext.結果.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="結果" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.攻守.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="攻守" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.攻撃側国名.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="攻撃側国名" Style="{StaticResource HeaderMenuItem}" />
+                    <MenuItem IsChecked="{Binding DataContext.防衛側国名.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="防衛側国名" Style="{StaticResource HeaderMenuItem}" />
                     <MenuItem IsChecked="{Binding DataContext.戦争継続時間.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="戦争継続時間" Style="{StaticResource HeaderMenuItem}" />
                     <MenuItem IsChecked="{Binding DataContext.戦闘.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="戦闘" Style="{StaticResource HeaderMenuItem}" />
                     <MenuItem IsChecked="{Binding DataContext.領域.Value, Source={x:Reference Proxy}, Mode=TwoWay}" Header="領域" Style="{StaticResource HeaderMenuItem}" />
@@ -82,6 +85,15 @@
                 <materialDesign:MaterialDataGridTextColumn
                             Header="結果" Binding="{Binding 結果}" IsReadOnly="True"
                             Visibility="{Binding DataContext.結果.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="攻守" Binding="{Binding 攻守}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.攻守.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="攻撃側国名" Binding="{Binding 攻撃側国名}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.攻撃側国名.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
+                <materialDesign:MaterialDataGridTextColumn
+                            Header="防衛側国名" Binding="{Binding 防衛側国名}" IsReadOnly="True"
+                            Visibility="{Binding DataContext.防衛側国名.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
                 <materialDesign:MaterialDataGridTextColumn
                             Header="戦争継続時間" Binding="{Binding 戦争継続時間, StringFormat=mm\\:ss}" IsReadOnly="True"
                             Visibility="{Binding DataContext.戦争継続時間.Value, Source={x:Reference Proxy}, Converter={StaticResource BooleanToVisibility}}" />
