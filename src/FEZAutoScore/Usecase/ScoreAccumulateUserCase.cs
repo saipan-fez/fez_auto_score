@@ -273,7 +273,24 @@ namespace FEZAutoScore.Usecase
                     // スクリーンショットからスコアを取得
                     var score = analyzer.Analyze(bitmap);
 
+                    // 取得できなければ終了
                     if (score == null)
+                    {
+                        return AccumulateResult.NotScoreCapture;
+                    }
+
+                    // スコア画面を開きながらアプリを再起動した場合などを想定して、
+                    // 最新スコアの詳細スコアが全て同じものは既に登録済みとして終了する
+                    var latestScore = LatestScore.Value;
+                    if (score.PC与ダメージ == latestScore.PC与ダメージ &&
+                        score.キルダメージボーナス == latestScore.キルダメージボーナス &&
+                        score.召喚解除ボーナス == latestScore.召喚解除ボーナス &&
+                        score.建築与ダメージ == latestScore.建築与ダメージ &&
+                        score.領域破壊ボーナス == latestScore.領域破壊ボーナス &&
+                        score.領域ダメージボーナス == latestScore.領域ダメージボーナス &&
+                        score.貢献度 == latestScore.貢献度 &&
+                        score.クリスタル運用ボーナス == latestScore.クリスタル運用ボーナス &&
+                        score.召喚行動ボーナス == latestScore.召喚行動ボーナス)
                     {
                         return AccumulateResult.NotScoreCapture;
                     }
