@@ -151,9 +151,10 @@ namespace FEZAutoScore.Model.Analyzer
                     score.戦争継続時間 = Scan(_warTimeOcr, bitmap, ScoreRectTable[nameof(ScoreEntity.戦争継続時間)]);
 
                     // 合計スコア
-                    score.戦闘 = Scan(_totalOcr, bitmap, ScoreRectTable[nameof(ScoreEntity.戦闘)]);
-                    score.領域 = Scan(_totalOcr, bitmap, ScoreRectTable[nameof(ScoreEntity.領域)]);
-                    score.支援 = Scan(_totalOcr, bitmap, ScoreRectTable[nameof(ScoreEntity.支援)]);
+                    //   総力戦の間はこれらの値が取得できないため、こららの値で読み取りが失敗してもそのまま解析を継続する
+                    score.戦闘 = ScanCatchOcrFailedExeption(_totalOcr, bitmap, ScoreRectTable[nameof(ScoreEntity.戦闘)]);
+                    score.領域 = ScanCatchOcrFailedExeption(_totalOcr, bitmap, ScoreRectTable[nameof(ScoreEntity.領域)]);
+                    score.支援 = ScanCatchOcrFailedExeption(_totalOcr, bitmap, ScoreRectTable[nameof(ScoreEntity.支援)]);
 
                     // 詳細スコア
                     score.PC与ダメージ = Scan(_detailOcr, bitmap, ScoreRectTable[nameof(ScoreEntity.PC与ダメージ)]);
@@ -245,6 +246,20 @@ namespace FEZAutoScore.Model.Analyzer
             var result = ocr.Process(bitmap, r);
 
             return result;
+        }
+
+        private T ScanCatchOcrFailedExeption<T>(Ocr<T> ocr, Bitmap bitmap, Rectangle r)
+        {
+            try
+            {
+                var result = ocr.Process(bitmap, r);
+
+                return result;
+            }
+            catch (OcrFailedException)
+            {
+                return default(T);
+            }
         }
 
         private WarResult ScanWarResult(Bitmap bitmap)
