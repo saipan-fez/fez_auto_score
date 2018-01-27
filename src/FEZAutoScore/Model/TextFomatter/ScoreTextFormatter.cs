@@ -173,12 +173,11 @@ namespace FEZAutoScore.Model.TextFomatter
 
     public class CsvScoreTextFormatter : BaseScoreTextFormatter
     {
-        private const string Delimiter = ",";
-
         public static string ToString(IEnumerable<ScoreEntity> scores)
         {
-            var header = string.Join(Delimiter,
+            var header = StringExtension.JoinAsCsv(
                 nameof(ScoreEntity.集計対象), nameof(ScoreEntity.記録日時), nameof(ScoreEntity.Map名), nameof(ScoreEntity.結果),
+                nameof(ScoreEntity.攻守), nameof(ScoreEntity.攻撃側国名), nameof(ScoreEntity.防衛側国名),
                 nameof(ScoreEntity.戦争継続時間), nameof(ScoreEntity.戦闘), nameof(ScoreEntity.領域), nameof(ScoreEntity.支援),
                 nameof(ScoreEntity.PC与ダメージ), nameof(ScoreEntity.キルダメージボーナス), nameof(ScoreEntity.召喚解除ボーナス),
                 nameof(ScoreEntity.建築与ダメージ), nameof(ScoreEntity.領域破壊ボーナス), nameof(ScoreEntity.領域ダメージボーナス),
@@ -189,8 +188,9 @@ namespace FEZAutoScore.Model.TextFomatter
                 nameof(ScoreEntity.スキル4), nameof(ScoreEntity.スキル5), nameof(ScoreEntity.スキル6),
                 nameof(ScoreEntity.スキル7), nameof(ScoreEntity.スキル8), nameof(ScoreEntity.備考));
 
-            var values = scores.Select(x => string.Join(Delimiter,
+            var values = scores.Select(x => StringExtension.JoinAsCsv(
                 x.集計対象, x.記録日時, x.Map名, x.結果,
+                x.攻守, x.攻撃側国名, x.防衛側国名,
                 x.戦争継続時間, x.戦闘, x.領域, x.支援,
                 x.PC与ダメージ, x.キルダメージボーナス, x.召喚解除ボーナス,
                 x.建築与ダメージ, x.領域破壊ボーナス, x.領域ダメージボーナス,
@@ -213,6 +213,15 @@ namespace FEZAutoScore.Model.TextFomatter
         {
             var newValue = (obj == null) ? string.Empty : obj.ToString();
             return own.Replace(oldValue, newValue);
+        }
+
+        public static string JoinAsCsv(params object[] values)
+        {
+            var v = values
+                .Select(x => x ?? string.Empty)
+                .Select(x => x.ToString().Replace("\"", "\"\""))
+                .Select(x => $"\"{x}\"");
+            return string.Join(",", v);
         }
     }
 }
