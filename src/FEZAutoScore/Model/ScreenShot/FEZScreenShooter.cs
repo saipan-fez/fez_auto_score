@@ -11,9 +11,7 @@ namespace FEZAutoScore.Model.ScreenShot
     {
         public Bitmap Shoot()
         {
-            var aa = Process.GetProcesses();
-
-            using (var p = Process.GetProcessesByName("FEzero_Client").FirstOrDefault())
+            using (var p = System.Diagnostics.Process.GetProcessesByName("FEzero_Client").FirstOrDefault())
             {
                 if (p == null)
                 {

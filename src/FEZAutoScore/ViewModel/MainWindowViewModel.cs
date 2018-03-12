@@ -28,6 +28,7 @@ namespace FEZAutoScore.ViewModel
         public ReactiveCommand ShowSettingDialogCommand { get; }
         public ReactiveCommand OpenScreenShotFolderCommand { get; }
         public ReactiveCommand OpenLatestScoreFolderCommand { get; }
+        public ReactiveCommand CreateFEZExecuteBatchCommand { get; }
 
         public SnackbarMessageQueue MessageQueue { get; } = new SnackbarMessageQueue();
 
@@ -137,6 +138,12 @@ namespace FEZAutoScore.ViewModel
             OpenLatestScoreFolderCommand.Subscribe(() =>
             {
                 _scoreAccumulateUseCase.OpenLatestScoreFolder();
+            });
+
+            CreateFEZExecuteBatchCommand = new ReactiveCommand();
+            CreateFEZExecuteBatchCommand.Subscribe(() =>
+            {
+                _scoreAccumulateUseCase.CreateFEZExecuteBatch();
             });
         }
     }
