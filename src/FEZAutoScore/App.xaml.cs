@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -15,6 +16,22 @@ namespace FEZAutoScore
     /// </summary>
     public partial class App : Application
     {
+        [STAThread]
+        public static void Main()
+        {
+            using (var semaphore = new Semaphore(1, 1, "FEZAutoScore", out bool createdNew))
+            {
+                if (!createdNew)
+                {
+                    return;
+                }
+
+                var app = new App();
+                app.InitializeComponent();
+                app.Run();
+            }
+        }
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
 #if DEBUG

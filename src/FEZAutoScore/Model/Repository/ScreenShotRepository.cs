@@ -36,7 +36,7 @@ namespace FEZAutoScore.Model.Repository
         {
             CreateDirectoryIfNotExists();
 
-            Process.Start(_directory.FullName);
+            System.Diagnostics.Process.Start(_directory.FullName);
         }
 
         public async Task SaveAsPngAsync(ScoreEntity score, Bitmap bitmap)

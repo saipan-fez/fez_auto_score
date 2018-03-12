@@ -12,6 +12,7 @@ using System.Windows;
 using System.Collections.Generic;
 using FEZAutoScore.Model.TextFomatter;
 using Microsoft.EntityFrameworkCore;
+using FEZAutoScore.Model.Process;
 
 namespace FEZAutoScore.Usecase
 {
@@ -215,6 +216,26 @@ namespace FEZAutoScore.Usecase
         public async Task SaveAsCsvAsync()
         {
             await _scoreFileRepository.SaveAsCsvAsync(ScoreCollection);
+        }
+
+        public void CreateFEZExecuteBatch()
+        {
+            var result = MessageBox.Show(
+                "「FEZ」と「FEZ Auto Score」を同時に起動するショートカットをデスクトップに作成します。\r\n続行しますか？",
+                "確認",
+                MessageBoxButton.OKCancel,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.OK)
+            {
+                try
+                {
+                    FEZExecuteBatchFactory.CreateBatchFile();
+
+                    MessageBox.Show("作成しました。");
+                }
+                catch { }
+            }
         }
 
         public void UpdateAppSetting(AppSetting appSetting)

@@ -53,6 +53,8 @@
                             <Separator />
                             <Button Content="CSVとして出力" Command="{Binding SaveAsCsvCommand}" />
                             <Separator />
+                            <Button Content="FEZ同時起動ショートカットを作成" Command="{Binding CreateFEZExecuteBatchCommand}" />
+                            <Separator />
                             <Button Content="設定" Command="{Binding ShowSettingDialogCommand}"/>
                         </StackPanel>
                     </materialDesign:PopupBox>

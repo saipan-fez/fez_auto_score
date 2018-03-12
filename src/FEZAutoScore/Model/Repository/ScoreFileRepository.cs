@@ -40,8 +40,7 @@ namespace FEZAutoScore.Model.Repository
         public void OpenDirectory()
         {
             CreateDirectoryIfNotExists();
-
-            Process.Start(_directory.FullName);
+            System.Diagnostics.Process.Start(_directory.FullName);
         }
 
         public async Task SaveAsLatestScoreAsync(string format, ScoreEntity score)
