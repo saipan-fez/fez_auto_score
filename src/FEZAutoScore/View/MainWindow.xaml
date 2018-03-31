@@ -11,6 +11,7 @@
                       mc:Ignorable="d"
                       Title="FEZ Auto Score" TitleCharacterCasing="Normal"
                       Height="600" Width="350" MinHeight="350" MinWidth="350"
+                      SaveWindowPosition="True"
                       ResizeMode="CanResizeWithGrip">
     <Controls:MetroWindow.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
