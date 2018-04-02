@@ -308,7 +308,8 @@
     <value>ツールを正しく動作させるために、必ずゲーム側で下記の設定を行ってください。
 
 1. ウィンドウカラーを「通常」にする
-2. 戦績結果の「詳細表示」をONにする
+2. ウィンドウモードにする（フルスクリーンは非対応）
+3. 戦績結果の「詳細表示」をONにする
 
 詳細は付属のReadMe.txtを参照してください。
 (このメッセージは次回以降は表示されません)
@@ -664,7 +665,8 @@
   </data>
   <data name="UnexpectedErrorMessage" xml:space="preserve">
     <value>予期せぬエラーが発生しました。
-アプリケーションを終了します。</value>
+アプリケーションを終了します。
+（errorlogフォルダにエラー内容が保存されます）</value>
   </data>
   <data name="Warrior_アサルトエッジ" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resource\SkillBitmap\Warrior_アサルトエッジ.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -47,7 +47,20 @@ namespace FEZAutoScore.Model.Repository
             }
             catch
             {
-                // 読み出しに失敗すれば生成
+                // 読み出しに失敗すればファイルを削除して再生成
+                try
+                {
+                    var file = _directory.GetFiles()
+                       .Where(x => x.Name == fileName)
+                       .FirstOrDefault();
+
+                    if (file != null)
+                    {
+                        file.Delete();
+                    }
+                }
+                catch { }
+
                 setting = new T();
             }
 
