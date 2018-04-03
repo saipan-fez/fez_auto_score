@@ -4,13 +4,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:ComponentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+        <CollectionViewSource x:Key="ScoreCollectionViewSource"
+                              Source="{Binding ScoreCollection}" IsLiveSortingRequested="True">
+            <CollectionViewSource.SortDescriptions>
+                <ComponentModel:SortDescription PropertyName="記録日時" Direction="Descending"/>
+            </CollectionViewSource.SortDescriptions>
+            <CollectionViewSource.LiveSortingProperties>
+                <System:String>記録日時</System:String>
+            </CollectionViewSource.LiveSortingProperties>
+        </CollectionViewSource>
     </UserControl.Resources>
     <Grid>
         <FrameworkElement x:Name="Proxy" DataContext="{Binding ColumnVisibleSetting.Value}" Visibility="Collapsed" />
-        <DataGrid ItemsSource="{Binding ScoreCollection}" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding Source={StaticResource ScoreCollectionViewSource}}" AutoGenerateColumns="False">
             <DataGrid.Resources>
                 <Style x:Key="HeaderMenuItem" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MaterialDesignMenuItem}">
                     <Setter Property="IsCheckable" Value="True"/>
