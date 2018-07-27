@@ -239,28 +239,18 @@ namespace FEZAutoScore.Model.Analyzer.Ocr
             };
         }
 
-        public static int GetHammingDistance(BitArray lhs, BitArray rhs)
-        {
-            if (lhs.Length != rhs.Length)
-            {
-                return int.MinValue;
-                // もしくは例外を発生。
-                //throw new System.Exception("");
-            }
-            bool[] first = new bool[lhs.Length];
-            lhs.CopyTo(first, 0);
-            bool[] second = new bool[rhs.Length];
-            rhs.CopyTo(second, 0);
-            return first
-                .Zip(second, (c1, c2) => new { c1, c2 })
-                .Count(m => m.c1 != m.c2);
-        }
         protected override string Process(Bitmap bitmap)
         {
-            var hash = bitmap.GenerateAverageHash();
             // ハッシュ値が一致するスキル名を検索 (_S, _Dは選択・選択不可状態の画像のためスキル名からは削除)
+            var hash = bitmap.GenerateAverageHash();
+            // ハミング距離のしきい値(判定用途:似た画像が存在しない or スキルスロットにスキルを未設定)
+            const int hamming_threshold = 10;
+
             var res = _skillDicionary
-                .OrderBy(x => GetHammingDistance(hash, x.Value)).FirstOrDefault().Key;
+                .Select(x => new { x.Key, x.Value, Distance = hash.GetHammingDistance(x.Value) })
+                .Where(x => x.Distance < hamming_threshold)
+                .OrderBy(x => x.Distance)
+                .Select(x => x.Key).FirstOrDefault();
 
             if (string.IsNullOrEmpty(res))
             {

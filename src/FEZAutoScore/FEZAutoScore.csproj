@@ -183,6 +183,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Common\BindableBase.cs" />
+    <Compile Include="Extension\BitArrayExtension.cs" />
     <Compile Include="Migrations\20180104061320_Score.cs" />
     <Compile Include="Migrations\20180104061320_Score.designer.cs">
       <DependentUpon>20180104061320_Score.cs</DependentUpon>
