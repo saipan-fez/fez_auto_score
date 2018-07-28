@@ -1871,9 +1871,9 @@ namespace FEZAutoScore.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        public static System.Drawing.Bitmap Warrior_アークスタンプ {
+        public static System.Drawing.Bitmap Warrior_アーススタンプ {
             get {
-                object obj = ResourceManager.GetObject("Warrior_アークスタンプ", resourceCulture);
+                object obj = ResourceManager.GetObject("Warrior_アーススタンプ", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1881,9 +1881,9 @@ namespace FEZAutoScore.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        public static System.Drawing.Bitmap Warrior_アークスタンプ_S {
+        public static System.Drawing.Bitmap Warrior_アーススタンプ_S {
             get {
-                object obj = ResourceManager.GetObject("Warrior_アークスタンプ_S", resourceCulture);
+                object obj = ResourceManager.GetObject("Warrior_アーススタンプ_S", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
