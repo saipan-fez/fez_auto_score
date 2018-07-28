@@ -16,7 +16,7 @@ namespace FEZAutoScore.Extension
              * dHash (Difference Hash)
              * @see http://www.hackerfactor.com/blog/index.php?/archives/529-Kind-of-Like-That.html
              * 1. リサイズ & グレースケール
-             * 2, 左側のピクセルと自身のピクセルの輝度を比較する。
+             * 2, 自ピクセルと次のピクセルを比較し2値化。
              */
             using (Bitmap target = new Bitmap(12, 11))
             {
@@ -46,7 +46,7 @@ namespace FEZAutoScore.Extension
                 var bits = new BitArray(buffer.Length / pixel_size - target.Height);
                 for (int i = 0, index = 0; i < bits.Length; i++, index += pixel_size)
                 {
-                    // グレースケールはBGRが同じなため
+                    // グレースケールはBGR値が同じなためB値のみで判定
                     if (buffer[index] > buffer[index + pixel_size])
                     {
                         bits.Set(i, true);
@@ -77,8 +77,8 @@ namespace FEZAutoScore.Extension
         public static byte[] ToByteArray(this Bitmap bitmap)
         {
             /*
-             * このインスタンスのビットマップデータをbyte配列にBGRA順でコピーします。
-             * ToDo: 4バイト単位でアクセスするのでint配列でもよいかも。
+             * このインスタンスのビットマップデータをBGRA順でbyte配列にコピーします。
+             * note: 4バイト単位でアクセスするのでint配列でもよいかも。
              */
             Debug.Assert(bitmap.PixelFormat == PixelFormat.Format32bppArgb);
             byte[] array = new byte[0];

@@ -8,6 +8,9 @@ namespace FEZAutoScore.Extension
     {
         public static string ToBitString(this BitArray bits)
         {
+            /*
+             * 2進数文字列に変換
+             */
             var sb = new StringBuilder(bits.Count);
             for (var i = 0; i < bits.Count; i++)
             {
@@ -19,18 +22,25 @@ namespace FEZAutoScore.Extension
 
         public static int GetHammingDistance(this BitArray source, BitArray target)
         {
-            // ハミング距離を算出
-            // ToDo: xor & popcountでも良いかも。
+            /*
+             * ハミング距離を算出
+             * note: popcountでも良いかも。
+             */
             if (source.Length != target.Length)
             {
-                // hamming_thresholdで除外値にするためにMaxValueを設定
+                // hamming_thresholdで除外値にするためにMaxValueを返す。
                 return int.MaxValue;
             }
-            var first = source.ToBitString();
-            var second = target.ToBitString();
-            return first.ToCharArray()
-                .Zip(second.ToCharArray(), (c1, c2) => new { c1, c2 })
-                .Count(m => m.c1 != m.c2);
+            var copyed = new BitArray(source).Xor(target);
+            int count = 0;
+            for (int i = 0; i < copyed.Length; i++)
+            {
+                if (copyed[i])
+                {
+                    count++;
+                }
+            }
+            return count;
         }
     }
 }
