@@ -522,8 +522,8 @@
     <Resource Include="Resource\SkillBitmap\Warrior_アサルトエッジ_S.bmp" />
     <Resource Include="Resource\SkillBitmap\Warrior_アタックレインフォース.bmp" />
     <Resource Include="Resource\SkillBitmap\Warrior_アタックレインフォース_S.bmp" />
-    <Resource Include="Resource\SkillBitmap\Warrior_アークスタンプ.bmp" />
-    <Resource Include="Resource\SkillBitmap\Warrior_アークスタンプ_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_アーススタンプ.bmp" />
+    <Resource Include="Resource\SkillBitmap\Warrior_アーススタンプ_S.bmp" />
     <Resource Include="Resource\SkillBitmap\Warrior_エクステンブレイド.bmp" />
     <Resource Include="Resource\SkillBitmap\Warrior_エクステンブレイド_S.bmp" />
     <Resource Include="Resource\SkillBitmap\Warrior_エンダーペイン.bmp" />

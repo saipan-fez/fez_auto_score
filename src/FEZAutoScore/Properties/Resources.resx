@@ -680,11 +680,11 @@
   <data name="Warrior_アタックレインフォース_S" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resource\SkillBitmap\Warrior_アタックレインフォース_S.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Warrior_アークスタンプ" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resource\SkillBitmap\Warrior_アークスタンプ.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Warrior_アーススタンプ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resource\skillbitmap\warrior_アーススタンプ.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Warrior_アークスタンプ_S" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resource\SkillBitmap\Warrior_アークスタンプ_S.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Warrior_アーススタンプ_S" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resource\skillbitmap\warrior_アーススタンプ_s.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Warrior_エクステンブレイド" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resource\SkillBitmap\Warrior_エクステンブレイド.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
