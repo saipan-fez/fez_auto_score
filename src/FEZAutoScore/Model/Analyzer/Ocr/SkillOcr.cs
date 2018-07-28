@@ -248,7 +248,7 @@ namespace FEZAutoScore.Model.Analyzer.Ocr
 
             var res = _skillDicionary
                 .Select(x => new { x.Key, x.Value, Distance = hash.GetHammingDistance(x.Value) })
-                .Where(x => x.Distance < hamming_threshold)
+                .Where(x => x.Distance <= hamming_threshold)
                 .OrderBy(x => x.Distance)
                 .Select(x => x.Key).FirstOrDefault();
 
