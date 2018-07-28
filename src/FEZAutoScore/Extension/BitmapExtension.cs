@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -24,12 +25,12 @@ namespace FEZAutoScore.Extension
                     // @see https://qiita.com/yoya/items/96c36b069e74398796f3#ntsc-%E4%BF%82%E6%95%B0-
                     ia.SetColorMatrix(new ColorMatrix(
                         new float[][]{
-                    new float[]{ 0.298839f, 0.298839f, 0.298839f, 0 ,0},
-                    new float[]{ 0.586811f, 0.586811f, 0.586811f, 0, 0},
-                    new float[]{ 0.114350f, 0.114350f, 0.114350f, 0, 0},
-                    new float[]{ 0, 0, 0, 1, 0},
-                    new float[]{ 0, 0, 0, 0, 1}
-                    }));
+                            new float[]{ 0.298839f, 0.298839f, 0.298839f, 0 ,0},
+                            new float[]{ 0.586811f, 0.586811f, 0.586811f, 0, 0},
+                            new float[]{ 0.114350f, 0.114350f, 0.114350f, 0, 0},
+                            new float[]{ 0, 0, 0, 1, 0},
+                            new float[]{ 0, 0, 0, 0, 1}
+                        }));
                     using (Graphics g = Graphics.FromImage(target))
                     {
                         g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
@@ -38,21 +39,17 @@ namespace FEZAutoScore.Extension
                             GraphicsUnit.Pixel, ia);
                     }
                 }
-                var bits = new BitArray(target.Width * target.Height);
-                int index = 0;
-                for (int y = 0; y < target.Height; y++)
+
+                byte[] buffer = target.ToByteArray();
+                const int pixel_size = 4;
+                // target Bitmapは12*11なため、target.Height 画像サイズ分減らす。
+                var bits = new BitArray(buffer.Length / pixel_size - target.Height);
+                for (int i = 0, index = 0; i < bits.Length; i++, index += pixel_size)
                 {
-                    // ToDo: GetPixelを2回しているので直したい。
-                    Color left = target.GetPixel(0, y);
-                    for (int x = 1; x < target.Width; x++)
+                    // グレースケールはBGRが同じなため
+                    if (buffer[index] > buffer[index + pixel_size])
                     {
-                        Color right = target.GetPixel(x, y);
-                        // グレースケールはRGB値が同じなため。
-                        if (left.R > right.R)
-                        {
-                            bits.Set(index, true);
-                        }
-                        index++;
+                        bits.Set(i, true);
                     }
                 }
                 return bits;
@@ -75,6 +72,27 @@ namespace FEZAutoScore.Extension
             }
 
             return ret;
+        }
+
+        public static byte[] ToByteArray(this Bitmap bitmap)
+        {
+            /*
+             * このインスタンスのビットマップデータをbyte配列にBGRA順でコピーします。
+             * ToDo: 4バイト単位でアクセスするのでint配列でもよいかも。
+             */
+            Debug.Assert(bitmap.PixelFormat == PixelFormat.Format32bppArgb);
+            byte[] array = new byte[0];
+            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+            try
+            {
+                array = new byte[bitmapData.Stride * bitmap.Height];
+                Marshal.Copy(bitmapData.Scan0, array, 0, array.Length);
+            }
+            finally
+            {
+                bitmap.UnlockBits(bitmapData);
+            }
+            return array;
         }
 
         public static unsafe void ToThresholding(this Bitmap bitmap, bool reverse = false)
