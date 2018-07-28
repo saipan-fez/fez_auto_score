@@ -20,6 +20,7 @@ namespace FEZAutoScore.Extension
         public static int GetHammingDistance(this BitArray source, BitArray target)
         {
             // ハミング距離を算出
+            // ToDo: xor & popcountでも良いかも。
             if (source.Length != target.Length)
             {
                 // hamming_thresholdで除外値にするためにMaxValueを設定
