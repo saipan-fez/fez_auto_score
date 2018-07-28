@@ -24,7 +24,7 @@ namespace FEZAutoScore.Extension
         {
             /*
              * ハミング距離を算出
-             * note: popcountでも良いかも。
+             * note: ビットが立っている判定はpopcountでも良いかも。
              */
             if (source.Length != target.Length)
             {
