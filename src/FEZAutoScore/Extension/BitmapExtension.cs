@@ -9,36 +9,54 @@ namespace FEZAutoScore.Extension
 {
     public static class BitmapExtension
     {
-        public static BitArray GenerateAverageHash(this Bitmap bitmap)
+        public static BitArray GenerateDifferenceHash(this Bitmap bitmap)
         {
             /*
-             * 処理フロー
-             * @see http://www.hackerfactor.com/blog/index.php?/archives/432-Looks-Like-It.html
-             * 1. 画像をグレースケール
-             * 2, グレースケール画像の平均値を取得
-             * 3, ハッシュ化
+             * dHash (Difference Hash)
+             * @see http://www.hackerfactor.com/blog/index.php?/archives/529-Kind-of-Like-That.html
+             * 1. リサイズ & グレースケール
+             * 2, 左側のピクセルと自身のピクセルの輝度を比較する。
              */
-            byte[] grayscale = new byte[bitmap.Width * bitmap.Height];
-            // グレースケール
-            for (int x = 0; x < bitmap.Width; x++)
+            using (Bitmap target = new Bitmap(12, 11))
             {
-                for (int y = 0; y < bitmap.Height; y++)
+                using (ImageAttributes ia = new ImageAttributes())
                 {
-                    // ToDo GetPixelをやめたい。
-                    Color pixel = bitmap.GetPixel(x, y);
-                    byte value = (byte)((306 * pixel.R + 601 * pixel.G + 117 * pixel.B) / 1024);
-                    grayscale[x + (y * bitmap.Height)] = value;
+                    // @see https://qiita.com/yoya/items/96c36b069e74398796f3#ntsc-%E4%BF%82%E6%95%B0-
+                    ia.SetColorMatrix(new ColorMatrix(
+                        new float[][]{
+                    new float[]{ 0.298839f, 0.298839f, 0.298839f, 0 ,0},
+                    new float[]{ 0.586811f, 0.586811f, 0.586811f, 0, 0},
+                    new float[]{ 0.114350f, 0.114350f, 0.114350f, 0, 0},
+                    new float[]{ 0, 0, 0, 1, 0},
+                    new float[]{ 0, 0, 0, 0, 1}
+                    }));
+                    using (Graphics g = Graphics.FromImage(target))
+                    {
+                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                        g.DrawImage(bitmap, new Rectangle(0, 0, target.Width, target.Height),
+                            0, 0, bitmap.Width, bitmap.Height,
+                            GraphicsUnit.Pixel, ia);
+                    }
                 }
+                var bits = new BitArray(target.Width * target.Height);
+                int index = 0;
+                for (int y = 0; y < target.Height; y++)
+                {
+                    // ToDo: GetPixelを2回しているので直したい。
+                    Color left = target.GetPixel(0, y);
+                    for (int x = 1; x < target.Width; x++)
+                    {
+                        Color right = target.GetPixel(x, y);
+                        // グレースケールはRGB値が同じなため。
+                        if (left.R > right.R)
+                        {
+                            bits.Set(index, true);
+                        }
+                        index++;
+                    }
+                }
+                return bits;
             }
-            var average = grayscale.Average(x => x);
-            var bits = new BitArray(grayscale.Length);
-            foreach (var element in grayscale
-                .Select((value, index) => new { value, index })
-                .Where(x => x.value >= average))
-            {
-                bits.Set(element.index, true);
-            }
-            return bits;
         }
 
         public static byte[] GenerateHashFromBitmapData(this Bitmap bitmap)
