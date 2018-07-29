@@ -461,8 +461,6 @@
     <Resource Include="Resource\SkillBitmap\Scout_ヴァイパーバイト_S.bmp" />
     <Resource Include="Resource\SkillBitmap\Scout_ヴォイドダークネス.bmp" />
     <Resource Include="Resource\SkillBitmap\Scout_ヴォイドダークネス_S.bmp" />
-    <Resource Include="Resource\SkillBitmap\Scout_通常攻撃.bmp" />
-    <Resource Include="Resource\SkillBitmap\Scout_通常攻撃_S.bmp" />
     <Resource Include="Resource\SkillBitmap\Sorcerer_アイスジャベリン.bmp" />
     <Resource Include="Resource\SkillBitmap\Sorcerer_アイスジャベリン_D.bmp" />
     <Resource Include="Resource\SkillBitmap\Sorcerer_アイスジャベリン_S.bmp" />
@@ -584,7 +582,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resource\SkillBitmap\Scout_通常攻撃弓.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_通常攻撃弓_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_通常攻撃短剣.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_通常攻撃短剣_S.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_通常攻撃銃.bmp" />
+    <Resource Include="Resource\SkillBitmap\Scout_通常攻撃銃_S.bmp" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.7\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.7\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
