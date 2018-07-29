@@ -1290,9 +1290,9 @@ namespace FEZAutoScore.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        public static System.Drawing.Bitmap Scout_通常攻撃 {
+        public static System.Drawing.Bitmap Scout_通常攻撃弓 {
             get {
-                object obj = ResourceManager.GetObject("Scout_通常攻撃", resourceCulture);
+                object obj = ResourceManager.GetObject("Scout_通常攻撃弓", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1300,9 +1300,49 @@ namespace FEZAutoScore.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        public static System.Drawing.Bitmap Scout_通常攻撃_S {
+        public static System.Drawing.Bitmap Scout_通常攻撃弓_S {
             get {
-                object obj = ResourceManager.GetObject("Scout_通常攻撃_S", resourceCulture);
+                object obj = ResourceManager.GetObject("Scout_通常攻撃弓_S", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        public static System.Drawing.Bitmap Scout_通常攻撃短剣 {
+            get {
+                object obj = ResourceManager.GetObject("Scout_通常攻撃短剣", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        public static System.Drawing.Bitmap Scout_通常攻撃短剣_S {
+            get {
+                object obj = ResourceManager.GetObject("Scout_通常攻撃短剣_S", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        public static System.Drawing.Bitmap Scout_通常攻撃銃 {
+            get {
+                object obj = ResourceManager.GetObject("Scout_通常攻撃銃", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        public static System.Drawing.Bitmap Scout_通常攻撃銃_S {
+            get {
+                object obj = ResourceManager.GetObject("Scout_通常攻撃銃_S", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

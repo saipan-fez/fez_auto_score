@@ -492,11 +492,23 @@
   <data name="Scout_ヴォイドダークネス_S" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resource\SkillBitmap\Scout_ヴォイドダークネス_S.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Scout_通常攻撃" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resource\SkillBitmap\Scout_通常攻撃.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Scout_通常攻撃弓" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\SkillBitmap\Scout_通常攻撃弓.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Scout_通常攻撃_S" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resource\SkillBitmap\Scout_通常攻撃_S.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Scout_通常攻撃弓_S" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\SkillBitmap\Scout_通常攻撃弓_S.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Scout_通常攻撃短剣" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\SkillBitmap\Scout_通常攻撃短剣.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Scout_通常攻撃短剣_S" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\SkillBitmap\Scout_通常攻撃短剣_S.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Scout_通常攻撃銃" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\SkillBitmap\Scout_通常攻撃銃.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Scout_通常攻撃銃_S" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\SkillBitmap\Scout_通常攻撃銃_S.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Sorcerer_アイスジャベリン" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resource\SkillBitmap\Sorcerer_アイスジャベリン.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
