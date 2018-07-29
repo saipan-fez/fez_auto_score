@@ -15,12 +15,16 @@ namespace FEZAutoScore.Extension
             /*
              * dHash (Difference Hash)
              * @see http://www.hackerfactor.com/blog/index.php?/archives/529-Kind-of-Like-That.html
+             * オリジナルのハッシュは64bitだけど、128bitに拡張
              * 1. リサイズ
              * 2. グレースケール
-             * 3, 自ピクセルと次のピクセルを比較。
+             * 3, 自ピクセルと右側のピクセルを比較。
              * 4, ビットの割り当て
              */
-            using (Bitmap target = new Bitmap(12, 11))
+            const int Width = 11;
+            const int Height = 11;
+            // 右側のピクセル比較用にwidthを+1する。
+            using (Bitmap target = new Bitmap(Width + 1, Height))
             {
                 using (ImageAttributes ia = new ImageAttributes())
                 {
@@ -41,16 +45,26 @@ namespace FEZAutoScore.Extension
                             GraphicsUnit.Pixel, ia);
                     }
                 }
-
-                byte[] buffer = target.ToByteArray();
-                const int pixel_size = 4;
-                // target Bitmapは12*11なため、target.Height 画像サイズ分減らす。
-                var bits = new BitArray(buffer.Length / pixel_size - target.Height);
-                for (int i = 0, index = 0; i < bits.Length; i++, index += pixel_size)
+                var bits = new BitArray(128);
+                Debug.Assert(bits.Length >= (Width * Height));
+                // バイト単位に
+                var Pixel_Unit = System.Drawing.Image.GetPixelFormatSize(target.PixelFormat) / 8;
+                
+                var hash_index = 0;
+                /*
+                 * Stride単位(行単位)に処理
+                 */
+                foreach (var row in target.ToByteArray(out int Stride).Chunks(Stride))
                 {
-                    // 3と4の処理
-                    // グレースケールはBGR値が同じなためB値のみで判定
-                    bits.Set(i, buffer[index] < buffer[index + pixel_size]);
+                    // 列方向に走査
+                    foreach (var byte_pos in Enumerable.Range(0, Width)
+                        .Select(_ => _ * Pixel_Unit))
+                    {
+                        // 3と4の処理
+                        // グレースケールはBGR値が同一なため、B値のみで判定
+                        bits.Set(hash_index, row[byte_pos] < row[byte_pos + Pixel_Unit]);
+                        hash_index++;
+                    }
                 }
                 return bits;
             }
@@ -74,18 +88,21 @@ namespace FEZAutoScore.Extension
             return ret;
         }
 
-        public static byte[] ToByteArray(this Bitmap bitmap)
+        /// <param name="Stride">Stride値</param>
+        /// <returns>バイト配列
+        /// PixelFormat.Format32bppArgb と PixelFormat.Format32bppRgbはBGRA順
+        /// </returns>
+        public static byte[] ToByteArray(this Bitmap bitmap, out int Stride)
         {
             /*
-             * このインスタンスのビットマップデータをBGRA順でbyte配列にコピーします。
-             * note: 4バイト単位でアクセスするのでint配列でもよいかも。
+             * このインスタンスのビットマップデータをbyte配列にコピーします。
              */
-            Debug.Assert(bitmap.PixelFormat == PixelFormat.Format32bppArgb);
             byte[] array = new byte[0];
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
             try
             {
-                array = new byte[bitmapData.Stride * bitmap.Height];
+                Stride = bitmapData.Stride;
+                array = new byte[bitmapData.Stride * bitmapData.Height];
                 Marshal.Copy(bitmapData.Scan0, array, 0, array.Length);
             }
             finally
