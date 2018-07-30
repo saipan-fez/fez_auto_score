@@ -43,6 +43,8 @@ namespace FEZAutoScore.Model.Analyzer.Ocr
                 { nameof(Resources.Cestus_ハードレインフォース_S), Resources.Cestus_ハードレインフォース_S.GenerateHashFromBitmapData() },
                 { nameof(Resources.Cestus_ハームアクティベイト), Resources.Cestus_ハームアクティベイト.GenerateHashFromBitmapData() },
                 { nameof(Resources.Cestus_ハームアクティベイト_S), Resources.Cestus_ハームアクティベイト_S.GenerateHashFromBitmapData() },
+                { nameof(Resources.Cestus_バックハンドブロウ), Resources.Cestus_バックハンドブロウ.GenerateHashFromBitmapData() },
+                { nameof(Resources.Cestus_バックハンドブロウ_S), Resources.Cestus_バックハンドブロウ_S.GenerateHashFromBitmapData() },
                 { nameof(Resources.Cestus_ホーネットスティング), Resources.Cestus_ホーネットスティング.GenerateHashFromBitmapData() },
                 { nameof(Resources.Cestus_ホーネットスティング_S), Resources.Cestus_ホーネットスティング_S.GenerateHashFromBitmapData() },
                 { nameof(Resources.Cestus_通常攻撃), Resources.Cestus_通常攻撃.GenerateHashFromBitmapData() },
