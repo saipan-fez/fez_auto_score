@@ -16,11 +16,11 @@ namespace FEZAutoScore.Model.Analyzer.Ocr
 
         public SkillOcr()
         {
-            var _works = Enum.GetNames(typeof(Work)).Where(x => x != nameof(Work.不明)).ToArray();
             /*
-             * Resourcesファイルからクラスのスキル画像を取得し、Dictionaryに変換する。
+             * Resourcesファイルからクラスのスキル画像を取得し、Dictionaryに登録する。
              * @see https://msdn.microsoft.com/ja-jp/library/system.resources.resourcemanager.getresourceset(v=vs.110).aspx
-             */
+            */
+            var _works = Enum.GetNames(typeof(Work)).Where(x => x != nameof(Work.不明)).ToArray();
             _skillDicionary = Resources.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true)
                                     .Cast<DictionaryEntry>()
                                     .Select(x => new KeyValuePair<string, Bitmap>(x.Key.ToString(), x.Value as Bitmap))
