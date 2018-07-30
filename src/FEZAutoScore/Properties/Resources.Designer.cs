@@ -343,6 +343,26 @@ namespace FEZAutoScore.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
+        public static System.Drawing.Bitmap Cestus_バックハンドブロウ {
+            get {
+                object obj = ResourceManager.GetObject("Cestus_バックハンドブロウ", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        public static System.Drawing.Bitmap Cestus_バックハンドブロウ_S {
+            get {
+                object obj = ResourceManager.GetObject("Cestus_バックハンドブロウ_S", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
         public static System.Drawing.Bitmap Cestus_ホーネットスティング {
             get {
                 object obj = ResourceManager.GetObject("Cestus_ホーネットスティング", resourceCulture);
